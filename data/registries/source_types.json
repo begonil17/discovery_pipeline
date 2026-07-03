@@ -1,0 +1,30 @@
+[
+    {
+        "name":"Wikipedia",
+        "description":"General encyclopedic information."
+    },
+    {
+        "name":"Official Website",
+        "description":"Primary authoritative source."
+    },
+    {
+        "name":"Recipe Website",
+        "description":"Cooking and recipes."
+    },
+    {
+        "name":"Tourism Website",
+        "description":"Regional and cultural information."
+    },
+    {
+        "name":"Academic Source",
+        "description":"Books and papers."
+    },
+    {
+        "name":"News Website",
+        "description":"Recent information."
+    },
+    {
+        "name":"Blog",
+        "description":"Articles about general things"
+    }
+]

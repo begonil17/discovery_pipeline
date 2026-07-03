@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Food",
+        "description": "Meals, desserts, beverages and culinary products."
+    },
+    {
+        "name": "Company",
+        "description": "Commercial companies and holdings."
+    },
+    {
+        "name": "Government Organization",
+        "description": "Government institutions."
+    },
+    {
+        "name": "University",
+        "description": "Universities."
+    },
+    {
+        "name": "Museum",
+        "description": "Museums and exhibitions."
+    },
+    {
+        "name": "Historical Person",
+        "description": "People important in Turkish history."
+    },
+    {
+        "name": "Historical Event",
+        "description": "Wars, treaties, revolutions and historical events."
+    },
+    {
+        "name": "Place",
+        "description": "Cities, districts, villages, mountains, lakes and geographical places."
+    }
+]
