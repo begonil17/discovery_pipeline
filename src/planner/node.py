@@ -19,11 +19,13 @@ def planner_node(state):
 
     seed = state["seed"]
 
-    entities = state["discovered_entities"]
+    entities = state["discovered_entities"][:3]
 
     print(f"Planning {len(entities)} entities...\n")
 
     planned_entities = []
+    rejected_entities = []
+    planned_count = 0
 
     total_start = time.time()
 
@@ -70,7 +72,12 @@ def planner_node(state):
 
         entity.planner = decision
 
-        planned_entities.append(entity)
+        planned_count += 1
+
+        if decision.include:
+            planned_entities.append(entity)
+        else:
+            rejected_entities.append(entity)
 
         print(
             f"Include: {decision.include}"
@@ -105,10 +112,15 @@ def planner_node(state):
     )
     print(
         f"Successfully planned "
-        f"{len(planned_entities)}/{len(entities)} entities."
+        f"{planned_count}/{len(entities)} entities."
+    )
+    print(
+        f"Included {len(planned_entities)} entities; "
+        f"excluded {len(rejected_entities)}."
     )
     print("=" * 80)
 
     return {
         "discovered_entities": planned_entities,
+        "rejected_entities": rejected_entities,
     }

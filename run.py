@@ -66,7 +66,7 @@ for title, depth in seeds.items():
 
                     max_depth=depth,
 
-                    entity_limit=100,
+                    entity_limit=300,
 
                 )
 
