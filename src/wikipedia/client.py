@@ -1,10 +1,19 @@
-import requests
+import time
 from urllib.parse import quote
 
-from src.config.settings import (
-    USER_AGENT,
-    REQUEST_TIMEOUT,
+import requests
+
+
+MAX_RETRIES = 5
+REQUEST_TIMEOUT = 90
+REQUEST_DELAY = 0.25
+INITIAL_BACKOFF = 5
+USER_AGENT = (
+    "DiscoveryPipelineBot/1.0 "
+    "(Educational research project; "
+    "contact: begum.atay0106@gmail.com)"
 )
+
 
 class WikipediaClient:
 
@@ -16,9 +25,82 @@ class WikipediaClient:
             f"https://{language}.wikipedia.org/w/api.php"
         )
 
-        self.headers = {
-            "User-Agent": USER_AGENT
-        }
+        self.session = requests.Session()
+
+        self.session.headers.update(
+            {
+                "User-Agent": USER_AGENT,
+            }
+        )
+
+    def _request(
+        self,
+        params: dict,
+    ):
+
+        for retry_number in range(MAX_RETRIES + 1):
+
+            try:
+
+                response = self.session.get(
+                    self.base_url,
+                    params=params,
+                    timeout=REQUEST_TIMEOUT,
+                )
+
+                if response.status_code == 429:
+
+                    if retry_number == MAX_RETRIES:
+                        response.raise_for_status()
+
+                    retry_after = response.headers.get(
+                        "Retry-After"
+                    )
+
+                    try:
+                        wait = float(retry_after)
+                    except (TypeError, ValueError):
+                        wait = (
+                            INITIAL_BACKOFF
+                            * (2 ** retry_number)
+                        )
+
+                    print("Rate limited by Wikipedia.")
+                    print(
+                        f"Waiting {wait:g} seconds..."
+                    )
+
+                    time.sleep(wait)
+                    continue
+
+                response.raise_for_status()
+
+                time.sleep(REQUEST_DELAY)
+
+                return response
+
+            except (
+                requests.Timeout,
+                requests.ConnectionError,
+            ) as e:
+
+                if retry_number == MAX_RETRIES:
+                    raise
+
+                wait = (
+                    INITIAL_BACKOFF
+                    * (2 ** retry_number)
+                )
+
+                print("Wikipedia request failed:")
+                print(e)
+                print(f"Waiting {wait} seconds...")
+
+                time.sleep(wait)
+
+        raise RuntimeError(
+            "Wikipedia request retries exhausted."
+        )
 
     def get_links(self, title):
 
@@ -42,19 +124,7 @@ class WikipediaClient:
 
         while True:
 
-            response = requests.get(
-
-                self.base_url,
-
-                params=params,
-
-                headers=self.headers,
-
-                timeout=REQUEST_TIMEOUT,
-
-            )
-
-            response.raise_for_status()
+            response = self._request(params)
 
             data = response.json()
 
@@ -71,7 +141,7 @@ class WikipediaClient:
             params.update(data["continue"])
 
         return links
-    
+
     def get_pages_info(self, titles: list[str]):
 
         if not titles:
@@ -88,14 +158,7 @@ class WikipediaClient:
             "cllimit": "max",
         }
 
-        response = requests.get(
-            self.base_url,
-            params=params,
-            headers=self.headers,
-            timeout=30,
-        )
-
-        response.raise_for_status()
+        response = self._request(params)
 
         pages = response.json()["query"]["pages"]
 
