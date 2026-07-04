@@ -9,7 +9,7 @@ def fetcher_node(state):
 
     client = FetcherClient()
 
-    entities = state["discovered_entities"][:3]
+    entities = state["discovered_entities"]
 
     for entity_no, entity in enumerate(entities, start=1):
 

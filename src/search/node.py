@@ -24,7 +24,7 @@ def search_node(state):
         api_key=os.getenv(TAVILY_API_KEY)
     )
 
-    entities = state["discovered_entities"][:3]
+    entities = state["discovered_entities"]
 
     planned = []
 
