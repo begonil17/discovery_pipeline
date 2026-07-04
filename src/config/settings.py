@@ -46,11 +46,11 @@ DEFAULT_ENTITY_LIMIT = 300
 
 LLM_PROVIDER = "gemini"
 
-PLANNER_MODEL = "gemini-2.5-flash"
+PLANNER_MODEL = "gemini-3.5-pro"
 
-SEARCH_MODEL = "gemini-2.5-flash"
+SEARCH_MODEL = "gemini-3.5-flash"
 
-FETCHER_MODEL = "gemini-2.5-flash"
+FETCHER_MODEL = "gemini-3.5-flash"
 
 REQUEST_TIMEOUT = 60
 
