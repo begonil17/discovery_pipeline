@@ -1,36 +1,64 @@
-INVALID_PREFIXES = [
-
-    "Kategori:",
-
-    "Category:",
-
-    "File:",
-
-    "Dosya:",
-
-    "Template:",
-
-    "Şablon:",
-
-    "Wikipedia:",
-
-    "Vikipedi:",
-
-    "Help:",
-
-    "Yardım:",
-
-    "Portal:",
-
-]
+BLOCKED_NAMESPACES = {
+    "book",
+    "category",
+    "category talk",
+    "draft",
+    "file",
+    "file talk",
+    "gadget",
+    "gadget definition",
+    "help",
+    "help talk",
+    "media",
+    "mediawiki",
+    "module",
+    "portal",
+    "portal talk",
+    "project",
+    "special",
+    "talk",
+    "template",
+    "template talk",
+    "timedtext",
+    "topic",
+    "user",
+    "user talk",
+    "dosya",
+    "dosya tartışma",
+    "kategori",
+    "kategori tartışma",
+    "kitap",
+    "konu",
+    "kullanıcı",
+    "kullanıcı mesaj",
+    "mediawiki tartışma",
+    "medya",
+    "modül",
+    "portal tartışma",
+    "taslak",
+    "tartışma",
+    "vikipedi",
+    "vikipedi tartışma",
+    "yardım",
+    "yardım tartışma",
+    "şablon",
+    "şablon tartışma",
+    "özel",
+}
 
 
 def keep(title):
 
-    for prefix in INVALID_PREFIXES:
+    if not title or not title.strip():
+        return False
 
-        if title.startswith(prefix):
+    namespace, separator, _ = title.partition(":")
 
-            return False
+    if (
+        separator
+        and namespace.strip().casefold()
+        in BLOCKED_NAMESPACES
+    ):
+        return False
 
     return True

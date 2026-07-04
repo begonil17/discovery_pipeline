@@ -3,21 +3,77 @@ import json
 PROMPT_TEMPLATE = """
 You are an expert knowledge acquisition planner.
 
-Your task is to decide how a Turkish knowledge base should acquire information about a discovered entity.
+Your task is to decide how a comprehensive Turkish cultural
+knowledge base should acquire information about a discovered entity.
 
 The knowledge base is intended for a Turkish AI assistant.
 
 ------------------------------------------------------------
-GOALS
+COVERAGE-FIRST PHILOSOPHY
 ------------------------------------------------------------
 
-1. Decide whether this entity belongs to the scope.
+Coverage is significantly more important than precision.
 
-2. Decide whether discovery should continue from this entity.
+Start with these assumptions:
 
-3. Assign a standardized entity type.
+- include = true
+- expand = true
 
-4. Decide what information should later be collected.
+Prefer false positives over false negatives.
+
+When uncertain, keep and expand the entity.
+
+An entity does not need to be famous, uniquely Turkish, or directly
+about the seed topic. Indirectly related and generic entities often
+connect valuable branches of the knowledge graph.
+
+Rejecting an entity permanently removes that branch. Therefore reject
+only when the page is clearly unusable or obviously unrelated to
+Turkish culture and to the seed topic.
+
+Entities that should usually be included include:
+
+- foods, dishes, desserts, drinks, ingredients and spices
+- cooking techniques, kitchen tools and culinary products
+- festivals, traditions, holidays, beliefs and folklore
+- cities, villages, regions, rivers, mountains and other places
+- plants, flowers, animals, ecology and agricultural topics
+- museums, monuments, buildings and architectural styles
+- historical figures, events and periods
+- ethnic groups, religions and communities
+- sports, clubs, stadiums and organizations
+- schools, universities and educational topics
+- folk dances, instruments, artists, writers, poems and books
+- crafts, clothing, textiles, mythology and transportation
+
+Do not reject an entity merely because its title sounds generic.
+
+------------------------------------------------------------
+INCLUDE AND EXPAND POLICY
+------------------------------------------------------------
+
+Set include = false only for pages that are clearly unusable, such as:
+
+- maintenance or administration pages
+- categories, templates, files, portals or project pages
+- help, user or discussion pages
+- pure navigation lists with no useful subject matter
+- disambiguation pages
+- pages that are clearly unrelated to Turkish culture and the seed
+
+Set expand = false only for the same clearly unusable cases.
+
+Otherwise prefer expand = true, especially for:
+
+- foods and ingredients
+- cities, villages and regions
+- plants, animals and geographical entities
+- architecture, museums and monuments
+- historical events, periods and people
+- organizations, traditions, sports and educational topics
+
+A page may be worth expanding even when it is only indirectly related
+to the seed, because it can lead to more specific Turkish entities.
 
 ------------------------------------------------------------
 ENTITY TYPE STANDARDIZATION
@@ -29,28 +85,11 @@ Existing entity types:
 
 Rules:
 
-- ALWAYS reuse an existing entity type if it is appropriate.
-
-- Only create a new entity type if none of the existing ones fit.
-
-- New entity types should be broad and reusable.
-
-Good examples:
-
-Food
-Company
-Government Organization
-Museum
-University
-Historical Event
-
-Bad examples:
-
-Turkish Dessert
-Bakery Product
-Ankara Government Office
-
-Those should be represented as subtypes.
+- Reuse an existing entity type whenever it fits.
+- Create a new type when needed to represent a useful entity.
+- New entity types must be broad and reusable.
+- Put narrow distinctions in subtype rather than creating overly
+  specific entity types.
 
 ------------------------------------------------------------
 INFORMATION TYPES
@@ -63,49 +102,38 @@ Existing information types:
 Rules:
 
 - Reuse existing information types whenever possible.
+- Add a new reusable information type when existing types do not cover
+  useful information.
+- Request all information that would make this entity useful in a
+  Turkish knowledge base.
+- Be comprehensive, but include only information applicable to the
+  entity.
+- Do not simply copy Wikipedia section headings.
 
-- Introduce a new information type only if absolutely necessary.
+Consider these information types whenever applicable:
 
-Think about what a real user would want to know.
-
-Do NOT simply copy Wikipedia sections.
-
-For example:
-
-Food:
-- recipe
-- ingredients
+- overview
+- origin
+- etymology
 - history
+- historical development
+- timeline and important dates
+- ingredients, recipe and preparation
+- characteristics and classifications
+- usage and products
+- cultural significance
 - regional variations
+- geography and location
+- ecology
+- architecture
+- notable examples
+- notable people
+- related traditions
+- organization, responsibilities and services
+- collections and visitor information
 
-Company:
-- history
-- products
-- subsidiaries
-- important dates
-
-Museum:
-- location
-- collections
-- visitor information
-
-------------------------------------------------------------
-DISCOVERY
-------------------------------------------------------------
-
-include = should become part of the knowledge base.
-
-expand = whether Wikipedia discovery should continue from this page.
-
-For example,
-
-American cuisine
-while discovering Turkish cuisine
-
-should likely be
-
-include = false
-expand = false
+For included entities, return multiple complementary information items
+when appropriate instead of requesting only a minimal description.
 
 ------------------------------------------------------------
 ENTITY
@@ -138,8 +166,7 @@ Return ONLY valid JSON matching this schema:
     "expand": true,
     "entity_type": {{
         "name": "...",
-        "subtype": "...",
-        "is_new_type": false
+        "subtype": "..."
     }},
     "information_to_collect": [
         {{

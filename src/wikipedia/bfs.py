@@ -32,18 +32,24 @@ class WikipediaBFS:
 
         discovered = []
 
-        queue.append(
-            Entity(
-                title=seed.title,
-                url=self.client.get_url(seed.title),
-                depth=0,
-                parent=None,
-            )
+        seed_entity = Entity(
+            title=seed.title,
+            url=self.client.get_url(seed.title),
+            depth=0,
+            parent=None,
         )
+
+        queue.append(seed_entity)
+
+        queued = {
+            seed_entity.title,
+        }
 
         while queue:
 
             entity = queue.popleft()
+
+            queued.discard(entity.title)
 
             if entity.title in visited:
 
@@ -52,6 +58,10 @@ class WikipediaBFS:
             visited.add(entity.title)
 
             discovered.append(entity)
+
+            if len(discovered) >= seed.entity_limit:
+
+                break
 
             if entity.depth >= seed.max_depth:
 
@@ -66,7 +76,7 @@ class WikipediaBFS:
                 if not keep(title):
                     continue
 
-                if title in visited:
+                if title in visited or title in queued:
                     continue
 
                 child = self.make_entity(link, entity)
@@ -74,15 +84,15 @@ class WikipediaBFS:
                 if child is None:
                     continue
 
-                if child.title in visited:
+                if (
+                    child.title in visited
+                    or child.title in queued
+                ):
                     continue
 
                 entity.children.append(child.title)
 
                 queue.append(child)
-
-            if len(discovered) >= seed.entity_limit:
-
-                break
+                queued.add(child.title)
 
         return discovered

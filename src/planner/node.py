@@ -19,7 +19,7 @@ def planner_node(state):
 
     seed = state["seed"]
 
-    entities = state["discovered_entities"][:3]
+    entities = state["discovered_entities"]
 
     print(f"Planning {len(entities)} entities...\n")
 
@@ -63,7 +63,37 @@ def planner_node(state):
 
             print(f"✗ Failed on {entity.title}")
             print(e)
-            continue
+            print(
+                "Keeping the entity with a permissive "
+                "fallback plan."
+            )
+
+            decision = PlannerDecision(
+                include=True,
+                expand=True,
+                entity_type={
+                    "name": "Cultural Entity",
+                    "subtype": None,
+                },
+                information_to_collect=[
+                    {
+                        "name": "overview",
+                        "priority": 5,
+                    },
+                    {
+                        "name": "history",
+                        "priority": 4,
+                    },
+                    {
+                        "name": "cultural significance",
+                        "priority": 4,
+                    },
+                ],
+                reason=(
+                    "Planner failed, so the entity was "
+                    "retained to avoid losing coverage."
+                ),
+            )
 
         print(
             f"✓ Gemini finished "
