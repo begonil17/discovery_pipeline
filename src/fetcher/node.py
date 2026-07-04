@@ -1,5 +1,23 @@
 from src.fetcher.client import FetcherClient
-from src.fetcher.saver import save_documents
+from src.fetcher.saver import (
+    OUTPUT_DIR,
+    sanitize_filename,
+    save_documents,
+)
+
+
+def already_fetched(entity) -> bool:
+
+    entity_dir = (
+        OUTPUT_DIR
+        / sanitize_filename(entity.title)
+    )
+
+    if not entity_dir.is_dir():
+        return False
+
+    return any(entity_dir.glob("*.json"))
+
 
 def fetcher_node(state):
 
@@ -17,7 +35,14 @@ def fetcher_node(state):
             f"\n[{entity_no}/{len(entities)}] {entity.title}"
         )
 
-        documents = []
+        if already_fetched(entity):
+
+            print("-" * 50)
+            print("Skipping already fetched entity:")
+            print(entity.title)
+            print("-" * 50)
+
+            continue
 
         if entity.search_plan is None:
 
@@ -26,6 +51,13 @@ def fetcher_node(state):
             entity.documents = []
 
             continue
+
+        print("-" * 50)
+        print("Fetching entity:")
+        print(entity.title)
+        print("-" * 50)
+
+        documents = []
 
         for task in entity.search_plan.tasks:
 
