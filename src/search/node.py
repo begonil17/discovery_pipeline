@@ -50,7 +50,7 @@ def search_node(state):
 
             response = tavily.search(
                 query=task.query,
-                max_results=5,
+                max_results=2,
             )
 
             task.results = [
