@@ -55,6 +55,14 @@ FETCHER_MODEL = "gemini-3.5-flash"
 REQUEST_TIMEOUT = 60
 
 # -----------------------
+# Fetcher
+# -----------------------
+
+FETCHER_SAFE_LENGTH = 12000
+
+FETCHER_BATCH_SAFE_LENGTH = 12000
+
+# -----------------------
 # Future
 # -----------------------
 
