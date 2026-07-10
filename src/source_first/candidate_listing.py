@@ -76,6 +76,31 @@ class CandidateLister:
         need: InformationNeed,
         source: SourceProfile,
     ) -> list[str]:
+        query_intents = need.candidate_queries
+
+        if query_intents:
+            templates = [
+                template
+                for template in source.collection_strategy.search_templates
+                if "{query}" in template
+            ]
+
+            if not templates:
+                templates = [
+                    "{query} site:{domain}",
+                ]
+
+            return [
+                template.format(
+                    query=query,
+                    topic=topic,
+                    information_need=need.name,
+                    domain=source.domain,
+                )
+                for query in query_intents
+                for template in templates
+            ]
+
         templates = source.collection_strategy.search_templates
 
         if not templates:

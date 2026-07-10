@@ -42,6 +42,7 @@ class FreshnessPolicy(BaseModel):
 class InformationNeed(BaseModel):
     name: str
     description: str = ""
+    candidate_queries: list[str] = Field(default_factory=list)
     importance: float = Field(default=3.0, ge=0.0, le=5.0)
     freshness_policy: FreshnessPolicy = Field(
         default_factory=FreshnessPolicy

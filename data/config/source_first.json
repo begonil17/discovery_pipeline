@@ -30,6 +30,12 @@
         {
           "name": "popular recipes",
           "description": "Commonly searched Turkish recipes with ingredients, measurements, preparation, timing, servings, and practical tips.",
+          "candidate_queries": [
+            "mercimek çorbası tarifi",
+            "karnıyarık tarifi",
+            "baklava tarifi",
+            "ev yapımı mantı tarifi"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -50,6 +56,11 @@
         {
           "name": "regional dishes",
           "description": "Regional Turkish dishes, local names, cities, ingredients, and cultural context.",
+          "candidate_queries": [
+            "Gaziantep yöresel yemekleri",
+            "Karadeniz yöresel yemekleri",
+            "Ege zeytinyağlı yemekleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -68,6 +79,11 @@
         {
           "name": "seasonal recipes",
           "description": "Recipes and foods associated with seasons, Ramadan, holidays, and seasonal ingredients.",
+          "candidate_queries": [
+            "Ramazan iftar menüsü",
+            "yaz yemekleri tarifleri",
+            "kış çorbası tarifleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -87,6 +103,11 @@
         {
           "name": "cooking techniques",
           "description": "Practical cooking guidance, traditional techniques, kitchen measurements, substitutions, and common mistakes.",
+          "candidate_queries": [
+            "pilav yapmanın püf noktaları",
+            "hamur mayalama püf noktaları",
+            "et marine etme yöntemleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -106,6 +127,11 @@
         {
           "name": "cultural food traditions",
           "description": "Food customs, rituals, historical context, and cultural meanings in Turkish cuisine.",
+          "candidate_queries": [
+            "Ramazan yemek gelenekleri",
+            "bayram yemekleri gelenekleri",
+            "Anadolu yemek kültürü"
+          ],
           "importance": 3,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -131,6 +157,11 @@
         {
           "name": "fixtures and standings",
           "description": "Current fixtures, results, standings, and competition tables for Turkish football.",
+          "candidate_queries": [
+            "Süper Lig fikstür puan durumu",
+            "TFF maç sonuçları",
+            "Türkiye Kupası fikstür"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "short_ttl",
@@ -150,6 +181,11 @@
         {
           "name": "transfer news",
           "description": "Recent transfer rumors, completed transfers, squad changes, and source dates.",
+          "candidate_queries": [
+            "Süper Lig transfer haberleri",
+            "Galatasaray transfer haberleri",
+            "Fenerbahçe transfer haberleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -169,6 +205,11 @@
         {
           "name": "team news",
           "description": "Recent news about major Turkish football clubs, injuries, coaches, match preparation, and official statements.",
+          "candidate_queries": [
+            "Süper Lig takım haberleri",
+            "Beşiktaş sakatlık haberleri",
+            "Trabzonspor maç hazırlığı"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -188,6 +229,11 @@
         {
           "name": "league structure and rules",
           "description": "League format, federation rules, competition regulations, disciplinary rules, and season-specific changes.",
+          "candidate_queries": [
+            "TFF Süper Lig statüsü",
+            "TFF futbol müsabaka talimatı",
+            "Süper Lig yabancı oyuncu kuralı"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "versioned",
@@ -207,6 +253,11 @@
         {
           "name": "club histories and rivalries",
           "description": "Evergreen context about major clubs, rivalries, stadiums, achievements, and football culture in Turkey.",
+          "candidate_queries": [
+            "Galatasaray tarihi",
+            "Fenerbahçe tarihi",
+            "Beşiktaş Galatasaray rekabeti"
+          ],
           "importance": 3,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -232,6 +283,11 @@
         {
           "name": "school calendar and exams",
           "description": "Current school calendar, exam dates, registration periods, holidays, and official education announcements in Turkey.",
+          "candidate_queries": [
+            "MEB çalışma takvimi",
+            "LGS sınav tarihi",
+            "YKS başvuru tarihi"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "short_ttl",
@@ -251,6 +307,11 @@
         {
           "name": "official regulations",
           "description": "Education laws, ministry regulations, application rules, placement rules, and official circulars.",
+          "candidate_queries": [
+            "MEB yönetmelik değişikliği",
+            "ortaöğretim kurumları yönetmeliği",
+            "ÖSYM sınav kılavuzu"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "versioned",
@@ -270,6 +331,11 @@
         {
           "name": "curriculum and school levels",
           "description": "Primary, secondary, high school, vocational education, curriculum structure, course content, and transitions between levels.",
+          "candidate_queries": [
+            "MEB öğretim programları",
+            "ilkokul ders programı",
+            "mesleki eğitim programları"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "versioned",
@@ -289,6 +355,11 @@
         {
           "name": "higher education and universities",
           "description": "University admissions, higher education structure, program information, quotas, and university-facing regulations.",
+          "candidate_queries": [
+            "YKS tercih kılavuzu",
+            "üniversite kontenjanları",
+            "YÖK program atlası"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -308,6 +379,11 @@
         {
           "name": "scholarships and student support",
           "description": "Scholarships, grants, dormitories, student loans, public support programs, and application conditions.",
+          "candidate_queries": [
+            "KYK burs başvurusu",
+            "KYK yurt başvurusu",
+            "öğrenci kredisi şartları"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -333,6 +409,11 @@
         {
           "name": "fixtures results and standings",
           "description": "Current fixtures, match results, league standings, cup schedules, and playoff information for volleyball in Turkey.",
+          "candidate_queries": [
+            "Sultanlar Ligi fikstür puan durumu",
+            "Efeler Ligi fikstür puan durumu",
+            "TVF maç sonuçları"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "short_ttl",
@@ -352,6 +433,11 @@
         {
           "name": "national teams and tournaments",
           "description": "Turkish national volleyball teams, international tournaments, squad announcements, match calendars, and results.",
+          "candidate_queries": [
+            "Filenin Sultanları maç takvimi",
+            "Türkiye voleybol milli takım kadrosu",
+            "VNL Türkiye voleybol maçları"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -371,6 +457,11 @@
         {
           "name": "club news and transfers",
           "description": "Recent volleyball club news, transfers, injuries, coaches, rosters, and official statements.",
+          "candidate_queries": [
+            "Sultanlar Ligi transfer haberleri",
+            "VakıfBank voleybol transfer",
+            "Eczacıbaşı voleybol haberleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -390,6 +481,11 @@
         {
           "name": "league structure and rules",
           "description": "Turkish volleyball league formats, federation rules, competition regulations, and season-specific changes.",
+          "candidate_queries": [
+            "TVF lig statüsü",
+            "Sultanlar Ligi statüsü",
+            "voleybol müsabaka talimatı"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "versioned",
@@ -409,6 +505,11 @@
         {
           "name": "player and club profiles",
           "description": "Foundational information about important Turkish volleyball clubs, players, achievements, venues, and rivalries.",
+          "candidate_queries": [
+            "VakıfBank voleybol tarihi",
+            "Eczacıbaşı voleybol tarihi",
+            "Türkiye voleybol oyuncuları"
+          ],
           "importance": 3,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -434,6 +535,11 @@
         {
           "name": "international fixtures and standings",
           "description": "Current fixtures, results, standings, rankings, and match calendars for international and major world football.",
+          "candidate_queries": [
+            "FIFA ranking",
+            "Champions League fixtures standings",
+            "World Cup qualifiers fixtures"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "short_ttl",
@@ -453,6 +559,11 @@
         {
           "name": "major tournaments and qualifiers",
           "description": "World Cup, continental tournaments, UEFA competitions, qualifiers, draws, groups, and tournament formats.",
+          "candidate_queries": [
+            "FIFA World Cup qualifiers groups",
+            "UEFA Champions League draw",
+            "EURO qualifiers groups"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -472,6 +583,11 @@
         {
           "name": "transfer news",
           "description": "Recent global football transfer news, completed transfers, rumors, squads, and source dates.",
+          "candidate_queries": [
+            "football transfer news",
+            "Premier League transfers",
+            "Real Madrid transfer news"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -491,6 +607,11 @@
         {
           "name": "player club and league profiles",
           "description": "Foundational information about important world football players, clubs, leagues, stadiums, records, and rivalries.",
+          "candidate_queries": [
+            "Lionel Messi profile",
+            "Real Madrid history",
+            "Premier League history"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -510,6 +631,11 @@
         {
           "name": "rules rankings and governance",
           "description": "FIFA and UEFA rules, rankings, governance decisions, competition regulations, and format changes.",
+          "candidate_queries": [
+            "FIFA regulations",
+            "UEFA competition regulations",
+            "FIFA world ranking rules"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "versioned",
@@ -535,6 +661,12 @@
         {
           "name": "popular international recipes",
           "description": "Commonly searched world cuisine recipes with ingredients, measurements, preparation, timing, serving count, and practical tips.",
+          "candidate_queries": [
+            "pizza tarifi",
+            "sushi tarifi",
+            "taco tarifi",
+            "paella tarifi"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -554,6 +686,11 @@
         {
           "name": "regional cuisines and signature dishes",
           "description": "Country and region cuisines, signature dishes, origins, ingredients, and cultural context.",
+          "candidate_queries": [
+            "İtalyan mutfağı yemekleri",
+            "Meksika mutfağı yemekleri",
+            "Japon mutfağı yemekleri"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -573,6 +710,11 @@
         {
           "name": "ingredients and substitutions",
           "description": "Common world cuisine ingredients, Turkish equivalents, substitutions, preparation notes, and storage guidance.",
+          "candidate_queries": [
+            "soya sosu yerine ne kullanılır",
+            "mascarpone yerine ne kullanılır",
+            "tortilla yerine ne kullanılır"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -592,6 +734,11 @@
         {
           "name": "cooking techniques",
           "description": "International cooking techniques, tools, temperatures, timing, and common mistakes.",
+          "candidate_queries": [
+            "risotto yapmanın püf noktaları",
+            "sushi pirinci nasıl yapılır",
+            "wok tavada pişirme teknikleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -611,6 +758,11 @@
         {
           "name": "recent food trends",
           "description": "Recent global food trends, popular dishes, diet trends, and seasonal international cooking interests.",
+          "candidate_queries": [
+            "viral yemek trendleri",
+            "airfryer tarifleri",
+            "yüksek proteinli tarifler"
+          ],
           "importance": 3,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -636,6 +788,11 @@
         {
           "name": "historical periods and timeline",
           "description": "Major periods of Turkish history, timelines, states, empires, transitions, and important dates.",
+          "candidate_queries": [
+            "Göktürkler tarihi",
+            "Selçuklu tarihi",
+            "Osmanlı kuruluş dönemi"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -655,6 +812,11 @@
         {
           "name": "key events and turning points",
           "description": "Wars, treaties, reforms, migrations, political changes, and turning points in Turkish history.",
+          "candidate_queries": [
+            "Malazgirt Savaşı",
+            "Tanzimat Fermanı",
+            "Kurtuluş Savaşı cepheleri"
+          ],
           "importance": 5,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -674,6 +836,11 @@
         {
           "name": "historical figures",
           "description": "Important rulers, statespeople, commanders, scholars, artists, and public figures in Turkish history.",
+          "candidate_queries": [
+            "Alp Arslan hayatı",
+            "Fatih Sultan Mehmet hayatı",
+            "Mustafa Kemal Atatürk biyografi"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "evergreen",
@@ -693,6 +860,11 @@
         {
           "name": "institutions sources and museums",
           "description": "Archives, museums, official history institutions, collections, primary sources, and visitor-useful historical resources.",
+          "candidate_queries": [
+            "Topkapı Sarayı koleksiyonları",
+            "Anadolu Medeniyetleri Müzesi",
+            "Cumhurbaşkanlığı Devlet Arşivleri"
+          ],
           "importance": 4,
           "freshness_policy": {
             "freshness_type": "recent",
@@ -712,6 +884,11 @@
         {
           "name": "recent research and publications",
           "description": "Recent academic publications, historical research, exhibitions, commemorations, and source updates related to Turkish history.",
+          "candidate_queries": [
+            "Türk tarihi makale",
+            "Osmanlı tarihi araştırma",
+            "Cumhuriyet tarihi yayın"
+          ],
           "importance": 3,
           "freshness_policy": {
             "freshness_type": "recent",
