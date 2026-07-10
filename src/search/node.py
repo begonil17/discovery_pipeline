@@ -21,7 +21,7 @@ def search_node(state):
     client = LLMClient()
     
     tavily = TavilyClient(
-        api_key=os.getenv(TAVILY_API_KEY)
+        api_key=TAVILY_API_KEY
     )
 
     entities = state["discovered_entities"]

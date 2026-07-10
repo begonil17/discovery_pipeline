@@ -428,7 +428,11 @@ class FetcherClient:
 
         return chunks
 
-    def clean_text(self, text: str) -> str:
+    def clean_text(
+        self,
+        text: str,
+        objective_context: str = "",
+    ) -> str:
 
         client = LLMClient()
 
@@ -436,6 +440,7 @@ class FetcherClient:
 
             text=text,
             empty_fragment_marker=EMPTY_FRAGMENT_MARKER,
+            objective_context=objective_context or "None",
 
         )
 
@@ -535,6 +540,7 @@ class FetcherClient:
     def clean_text_batch(
         self,
         chunks: list[str],
+        objective_context: str = "",
     ) -> list[str]:
 
         if not chunks:
@@ -546,6 +552,7 @@ class FetcherClient:
 
             text=self.format_batch_parts(chunks),
             empty_fragment_marker=EMPTY_FRAGMENT_MARKER,
+            objective_context=objective_context or "None",
 
         )
 
@@ -619,6 +626,7 @@ class FetcherClient:
     def clean_chunks_in_batches(
         self,
         chunks: list[str],
+        objective_context: str = "",
     ) -> list[str]:
 
         batches = self.batch_chunks(chunks)
@@ -648,7 +656,10 @@ class FetcherClient:
                     f"Chunk {chunk_index} size: {len(chunk)}"
                 )
 
-            cleaned_batch = self.clean_text_batch(batch)
+            cleaned_batch = self.clean_text_batch(
+                batch,
+                objective_context=objective_context,
+            )
 
             for offset, cleaned_chunk in enumerate(
                 cleaned_batch
@@ -665,7 +676,11 @@ class FetcherClient:
 
         return cleaned_chunks
 
-    def fetch(self, url: str) -> Document | None:
+    def fetch(
+        self,
+        url: str,
+        objective_context: str = "",
+    ) -> Document | None:
 
         print(f"Fetching from Tavily... {url}")
 
@@ -715,7 +730,10 @@ class FetcherClient:
             print("Cleaning chunk 1/1...")
             print(f"Chunk 1 size: {len(text)}")
 
-            cleaned = self.clean_text(text)
+            cleaned = self.clean_text(
+                text,
+                objective_context=objective_context,
+            )
 
             print(
                 f"Cleaned chunk 1 size: "
@@ -729,7 +747,8 @@ class FetcherClient:
             print(f"Chunk count: {len(chunks)}")
 
             cleaned_chunks = self.clean_chunks_in_batches(
-                chunks
+                chunks,
+                objective_context=objective_context,
             )
 
             cleaned = "\n\n".join(cleaned_chunks)

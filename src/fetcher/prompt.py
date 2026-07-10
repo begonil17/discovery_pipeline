@@ -29,6 +29,8 @@ Rules:
 - Keep the original level of factual detail.
 - Never summarize.
 - Never omit factual information because it looks minor.
+- If a collection objective is provided, be especially careful to
+  preserve the requested fields and content type.
 - If a personal or promotional sentence contains a useful fact,
   keep the useful fact and rewrite it neutrally.
 
@@ -70,6 +72,10 @@ return exactly this marker and nothing else:
 
 Do not explain anything.
 
+Collection objective:
+
+{objective_context}
+
 Webpage fragment:
 
 ------------------------
@@ -106,6 +112,8 @@ Rules:
 - Keep the original level of factual detail.
 - Never summarize.
 - Never omit factual information because it looks minor.
+- If a collection objective is provided, be especially careful to
+  preserve the requested fields and content type.
 - If a personal or promotional sentence contains a useful fact,
   keep the useful fact and rewrite it neutrally.
 - Do not merge parts together.
@@ -150,6 +158,10 @@ marker for that part and nothing else:
 {empty_fragment_marker}
 
 Do not explain anything.
+
+Collection objective:
+
+{objective_context}
 
 Webpage fragments:
 

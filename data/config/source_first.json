@@ -1,0 +1,734 @@
+{
+  "candidate_listing": {
+    "max_results_per_source_need": 8,
+    "exploration_budget_ratio": 0.1
+  },
+  "selection": {
+    "allocation": {
+      "popular": 0.6,
+      "foundational": 0.25,
+      "diverse": 0.15
+    },
+    "max_source_share_per_need": 0.6
+  },
+  "scoring_weights": {
+    "relevance": 0.22,
+    "information_need_importance": 0.18,
+    "freshness": 0.12,
+    "popularity": 0.12,
+    "source_authority": 0.16,
+    "novelty": 0.12,
+    "diversity": 0.08,
+    "redundancy_penalty": 0.25,
+    "cost_penalty": 0.08
+  },
+  "topic_plans": [
+    {
+      "topic": "Türk mutfağı",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "popular recipes",
+          "description": "Commonly searched Turkish recipes with ingredients, measurements, preparation, timing, servings, and practical tips.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "high coverage of practical recipes",
+          "max_selected_items": 5,
+          "fields_to_preserve": [
+            "ingredients",
+            "measurements",
+            "preparation",
+            "cooking time",
+            "serving count",
+            "tips"
+          ]
+        },
+        {
+          "name": "regional dishes",
+          "description": "Regional Turkish dishes, local names, cities, ingredients, and cultural context.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "balanced regional diversity",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "region",
+            "local name",
+            "ingredients",
+            "cultural context"
+          ]
+        },
+        {
+          "name": "seasonal recipes",
+          "description": "Recipes and foods associated with seasons, Ramadan, holidays, and seasonal ingredients.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 180,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "current and recurring seasonal needs",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "season",
+            "occasion",
+            "ingredients",
+            "preparation",
+            "tips"
+          ]
+        },
+        {
+          "name": "cooking techniques",
+          "description": "Practical cooking guidance, traditional techniques, kitchen measurements, substitutions, and common mistakes.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "practical guidance",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "technique",
+            "measurements",
+            "temperature",
+            "timing",
+            "common mistakes"
+          ]
+        },
+        {
+          "name": "cultural food traditions",
+          "description": "Food customs, rituals, historical context, and cultural meanings in Turkish cuisine.",
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "authoritative cultural background",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "tradition",
+            "history",
+            "region",
+            "occasion",
+            "cultural meaning"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Türkiye'de futbol",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "fixtures and standings",
+          "description": "Current fixtures, results, standings, and competition tables for Turkish football.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 2,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh official and practical tables",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "fixture",
+            "score",
+            "standing",
+            "date",
+            "competition"
+          ]
+        },
+        {
+          "name": "transfer news",
+          "description": "Recent transfer rumors, completed transfers, squad changes, and source dates.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 14,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh high-signal transfer updates",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "player",
+            "club",
+            "date",
+            "transfer status",
+            "source attribution"
+          ]
+        },
+        {
+          "name": "team news",
+          "description": "Recent news about major Turkish football clubs, injuries, coaches, match preparation, and official statements.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 7,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "recent practical team context",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "club",
+            "player",
+            "coach",
+            "date",
+            "official statement"
+          ]
+        },
+        {
+          "name": "league structure and rules",
+          "description": "League format, federation rules, competition regulations, disciplinary rules, and season-specific changes.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative rule and structure information",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "rule",
+            "competition",
+            "season",
+            "effective date",
+            "authority"
+          ]
+        },
+        {
+          "name": "club histories and rivalries",
+          "description": "Evergreen context about major clubs, rivalries, stadiums, achievements, and football culture in Turkey.",
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "foundational background",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "club",
+            "history",
+            "rivalry",
+            "stadium",
+            "achievements"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Türkiye'de eğitim",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "school calendar and exams",
+          "description": "Current school calendar, exam dates, registration periods, holidays, and official education announcements in Turkey.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 14,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh official practical dates",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "date",
+            "exam",
+            "school year",
+            "grade level",
+            "official announcement"
+          ]
+        },
+        {
+          "name": "official regulations",
+          "description": "Education laws, ministry regulations, application rules, placement rules, and official circulars.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative current rules",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "rule",
+            "effective date",
+            "institution",
+            "scope",
+            "official source"
+          ]
+        },
+        {
+          "name": "curriculum and school levels",
+          "description": "Primary, secondary, high school, vocational education, curriculum structure, course content, and transitions between levels.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "foundational structure and current curriculum",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "school level",
+            "curriculum",
+            "course",
+            "grade",
+            "transition"
+          ]
+        },
+        {
+          "name": "higher education and universities",
+          "description": "University admissions, higher education structure, program information, quotas, and university-facing regulations.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "practical university and admission information",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "university",
+            "program",
+            "quota",
+            "admission",
+            "date"
+          ]
+        },
+        {
+          "name": "scholarships and student support",
+          "description": "Scholarships, grants, dormitories, student loans, public support programs, and application conditions.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 60,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "actionable support and application details",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "support type",
+            "eligibility",
+            "application date",
+            "amount",
+            "institution"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Türkiye'de voleybol",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "fixtures results and standings",
+          "description": "Current fixtures, match results, league standings, cup schedules, and playoff information for volleyball in Turkey.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 2,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh competition tables and match information",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "fixture",
+            "result",
+            "standing",
+            "date",
+            "competition"
+          ]
+        },
+        {
+          "name": "national teams and tournaments",
+          "description": "Turkish national volleyball teams, international tournaments, squad announcements, match calendars, and results.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 14,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "fresh national team and tournament context",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "national team",
+            "tournament",
+            "squad",
+            "match",
+            "date"
+          ]
+        },
+        {
+          "name": "club news and transfers",
+          "description": "Recent volleyball club news, transfers, injuries, coaches, rosters, and official statements.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 14,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "recent practical club updates",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "club",
+            "player",
+            "coach",
+            "transfer status",
+            "date"
+          ]
+        },
+        {
+          "name": "league structure and rules",
+          "description": "Turkish volleyball league formats, federation rules, competition regulations, and season-specific changes.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative rule and structure information",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "rule",
+            "league",
+            "season",
+            "effective date",
+            "authority"
+          ]
+        },
+        {
+          "name": "player and club profiles",
+          "description": "Foundational information about important Turkish volleyball clubs, players, achievements, venues, and rivalries.",
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "balanced foundational background",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "player",
+            "club",
+            "achievement",
+            "venue",
+            "history"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Dünyada futbol",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "international fixtures and standings",
+          "description": "Current fixtures, results, standings, rankings, and match calendars for international and major world football.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 2,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh global football tables and calendars",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "fixture",
+            "result",
+            "standing",
+            "ranking",
+            "date"
+          ]
+        },
+        {
+          "name": "major tournaments and qualifiers",
+          "description": "World Cup, continental tournaments, UEFA competitions, qualifiers, draws, groups, and tournament formats.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 30,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "current tournament and qualification context",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "tournament",
+            "group",
+            "draw",
+            "qualification",
+            "date"
+          ]
+        },
+        {
+          "name": "transfer news",
+          "description": "Recent global football transfer news, completed transfers, rumors, squads, and source dates.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 14,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh high-signal transfer updates",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "player",
+            "club",
+            "league",
+            "transfer status",
+            "date"
+          ]
+        },
+        {
+          "name": "player club and league profiles",
+          "description": "Foundational information about important world football players, clubs, leagues, stadiums, records, and rivalries.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "foundational global football background",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "player",
+            "club",
+            "league",
+            "stadium",
+            "record"
+          ]
+        },
+        {
+          "name": "rules rankings and governance",
+          "description": "FIFA and UEFA rules, rankings, governance decisions, competition regulations, and format changes.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative current governance information",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "rule",
+            "ranking",
+            "organization",
+            "competition",
+            "effective date"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Dünya mutfağı",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "popular international recipes",
+          "description": "Commonly searched world cuisine recipes with ingredients, measurements, preparation, timing, serving count, and practical tips.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "high practical recipe usefulness",
+          "max_selected_items": 5,
+          "fields_to_preserve": [
+            "ingredients",
+            "measurements",
+            "preparation",
+            "cooking time",
+            "serving count"
+          ]
+        },
+        {
+          "name": "regional cuisines and signature dishes",
+          "description": "Country and region cuisines, signature dishes, origins, ingredients, and cultural context.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "diverse regional coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "country",
+            "region",
+            "dish",
+            "origin",
+            "cultural context"
+          ]
+        },
+        {
+          "name": "ingredients and substitutions",
+          "description": "Common world cuisine ingredients, Turkish equivalents, substitutions, preparation notes, and storage guidance.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "practical ingredient guidance",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "ingredient",
+            "substitution",
+            "Turkish equivalent",
+            "usage",
+            "storage"
+          ]
+        },
+        {
+          "name": "cooking techniques",
+          "description": "International cooking techniques, tools, temperatures, timing, and common mistakes.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "practical technique coverage",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "technique",
+            "tool",
+            "temperature",
+            "timing",
+            "common mistakes"
+          ]
+        },
+        {
+          "name": "recent food trends",
+          "description": "Recent global food trends, popular dishes, diet trends, and seasonal international cooking interests.",
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "controlled recent trend coverage",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "trend",
+            "dish",
+            "country",
+            "date",
+            "reason for popularity"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Türk tarihi",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "historical periods and timeline",
+          "description": "Major periods of Turkish history, timelines, states, empires, transitions, and important dates.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "foundational chronological coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "period",
+            "state",
+            "date",
+            "timeline",
+            "transition"
+          ]
+        },
+        {
+          "name": "key events and turning points",
+          "description": "Wars, treaties, reforms, migrations, political changes, and turning points in Turkish history.",
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "high-value event coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "event",
+            "date",
+            "location",
+            "participants",
+            "consequence"
+          ]
+        },
+        {
+          "name": "historical figures",
+          "description": "Important rulers, statespeople, commanders, scholars, artists, and public figures in Turkish history.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "balanced biographical coverage",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "person",
+            "period",
+            "role",
+            "works",
+            "legacy"
+          ]
+        },
+        {
+          "name": "institutions sources and museums",
+          "description": "Archives, museums, official history institutions, collections, primary sources, and visitor-useful historical resources.",
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 365,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "authoritative sources and practical resources",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "institution",
+            "collection",
+            "source",
+            "location",
+            "visitor information"
+          ]
+        },
+        {
+          "name": "recent research and publications",
+          "description": "Recent academic publications, historical research, exhibitions, commemorations, and source updates related to Turkish history.",
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 365,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "controlled recent scholarly and cultural updates",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "publication",
+            "author",
+            "date",
+            "topic",
+            "institution"
+          ]
+        }
+      ]
+    }
+  ]
+}

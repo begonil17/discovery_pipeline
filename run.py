@@ -1,65 +1,50 @@
 from src.graph.workflow import build_graph
-
 from src.schemas.seed import Seed
 
-seeds = {
-    "Türk mutfağı": 2,
-    "Türk kültürü": 4,
-    "Türkiye'de turizm": 2,
-    "Türk folkloru": 2,
-    "Türkiye'de eğitim": 1,
-    "Türkiye'de spor": 2,
-    "Türk müziği": 2,
-    "Türk edebiyatı": 2,
-    "Türkiye'de mimarlık": 1,
-    "Türkiye'nin illeri": 2,
-}
+
+seeds = [
+    "Türk mutfağı",
+    "Türkiye'de futbol",
+    "Türkiye'de eğitim",
+    "Türkiye'de voleybol",
+    "Dünyada futbol",
+    "Dünya mutfağı",
+    "Türk tarihi",
+]
 
 
 app = build_graph()
 
-for title, depth in seeds.items():
-
+for title in seeds:
     print(
-        f"Running graph for: {title} "
-        f"(depth={depth})"
+        f"Running source-first graph for: {title}"
     )
 
     try:
-
         result = app.invoke(
-
             {
-
                 "seed": Seed(
-
                     title=title,
-
-                    max_depth=depth,
-
-                    entity_limit=250,
-
+                    max_depth=0,
+                    entity_limit=0,
                 )
-
             }
-
         )
 
         print(
-
             "Pipeline finished for "
-            f"{title} with "
-            f"{len(result['discovered_entities'])} "
-            "entities."
-
+            f"{title}: "
+            f"{len(result.get('candidates', []))} candidates, "
+            f"{len(result.get('selected_candidates', []))} selected, "
+            f"{len(result.get('documents', []))} fetched."
         )
+
+        if result.get("errors"):
+            print("Errors:")
+            for error in result["errors"]:
+                print(f"- {error}")
 
     except Exception as e:
-
-        print(
-            f"Failed to process: {title} "
-            f"(depth={depth})"
-        )
-
+        print(f"Failed to process: {title}")
         print(e)
         print("Continuing with the next seed.")

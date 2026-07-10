@@ -1,0 +1,1122 @@
+{
+  "sources": [
+    {
+      "source_id": "yemek_com",
+      "domain": "yemek.com",
+      "name": "Yemek.com",
+      "supported_topics": [
+        "Türk mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular recipes",
+        "seasonal recipes",
+        "cooking techniques"
+      ],
+      "language": "tr",
+      "authority_score": 0.72,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://yemek.com/tarif/"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "{information_need} tarif site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "tips"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved source for practical recipe content."
+    },
+    {
+      "source_id": "lezzet",
+      "domain": "lezzet.com.tr",
+      "name": "Lezzet",
+      "supported_topics": [
+        "Türk mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular recipes",
+        "seasonal recipes",
+        "regional dishes"
+      ],
+      "language": "tr",
+      "authority_score": 0.7,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.lezzet.com.tr/yemek-tarifleri"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "geleneksel Türk yemekleri {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "serving count"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved source for recipes and regional dish roundups."
+    },
+    {
+      "source_id": "nefisyemektarifleri",
+      "domain": "nefisyemektarifleri.com",
+      "name": "Nefis Yemek Tarifleri",
+      "supported_topics": [
+        "Türk mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular recipes",
+        "seasonal recipes",
+        "cooking techniques"
+      ],
+      "language": "tr",
+      "authority_score": 0.68,
+      "update_frequency": "daily",
+      "popularity_metric": "rating_count",
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.nefisyemektarifleri.com"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "en çok deftere eklenen Türk yemekleri site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "rating",
+          "rating count",
+          "tips"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved source where popularity signals may later be parsed."
+    },
+    {
+      "source_id": "kultur_portali",
+      "domain": "kulturportali.gov.tr",
+      "name": "Kültür Portalı",
+      "supported_topics": [
+        "Türk mutfağı"
+      ],
+      "supported_information_needs": [
+        "regional dishes",
+        "cultural food traditions"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.kulturportali.gov.tr"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "yöresel yemek kültürü site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "region",
+          "history",
+          "tradition",
+          "cultural meaning"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Authoritative cultural and regional background source."
+    },
+    {
+      "source_id": "tff",
+      "domain": "tff.org",
+      "name": "Türkiye Futbol Federasyonu",
+      "supported_topics": [
+        "Türkiye'de futbol"
+      ],
+      "supported_information_needs": [
+        "fixtures and standings",
+        "league structure and rules",
+        "team news"
+      ],
+      "language": "tr",
+      "authority_score": 0.95,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.tff.org"
+        ],
+        "search_templates": [
+          "{information_need} Türkiye futbol site:{domain}",
+          "Süper Lig {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "date",
+          "competition",
+          "fixture",
+          "standing",
+          "rule",
+          "official statement"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Primary official source for Turkish football."
+    },
+    {
+      "source_id": "mackolik",
+      "domain": "mackolik.com",
+      "name": "Maçkolik",
+      "supported_topics": [
+        "Türkiye'de futbol"
+      ],
+      "supported_information_needs": [
+        "fixtures and standings"
+      ],
+      "language": "tr",
+      "authority_score": 0.76,
+      "update_frequency": "live",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.mackolik.com"
+        ],
+        "search_templates": [
+          "Süper Lig puan durumu fikstür site:{domain}",
+          "{information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "fixture",
+          "score",
+          "standing",
+          "date"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "Practical source for fixtures and standings."
+    },
+    {
+      "source_id": "beinsports_tr",
+      "domain": "beinsports.com.tr",
+      "name": "beIN SPORTS Türkiye",
+      "supported_topics": [
+        "Türkiye'de futbol"
+      ],
+      "supported_information_needs": [
+        "team news",
+        "transfer news",
+        "fixtures and standings"
+      ],
+      "language": "tr",
+      "authority_score": 0.78,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://beinsports.com.tr"
+        ],
+        "search_templates": [
+          "{information_need} Süper Lig site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "club",
+          "player",
+          "coach",
+          "date",
+          "match"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved sports news and match context source."
+    },
+    {
+      "source_id": "transfermarkt_tr",
+      "domain": "transfermarkt.com.tr",
+      "name": "Transfermarkt Türkiye",
+      "supported_topics": [
+        "Türkiye'de futbol"
+      ],
+      "supported_information_needs": [
+        "transfer news",
+        "club histories and rivalries"
+      ],
+      "language": "tr",
+      "authority_score": 0.74,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.transfermarkt.com.tr"
+        ],
+        "search_templates": [
+          "Süper Lig transferler site:{domain}",
+          "{information_need} Türkiye site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "player",
+          "club",
+          "date",
+          "transfer status",
+          "market value"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Structured football transfer and club background source."
+    },
+    {
+      "source_id": "ntvspor",
+      "domain": "ntvspor.net",
+      "name": "NTV Spor",
+      "supported_topics": [
+        "Türkiye'de futbol"
+      ],
+      "supported_information_needs": [
+        "transfer news",
+        "team news",
+        "club histories and rivalries"
+      ],
+      "language": "tr",
+      "authority_score": 0.7,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.ntvspor.net"
+        ],
+        "search_templates": [
+          "{information_need} Süper Lig site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "club",
+          "player",
+          "coach",
+          "date",
+          "source attribution"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved source for recent football news."
+    },
+    {
+      "source_id": "meb",
+      "domain": "meb.gov.tr",
+      "name": "Milli Eğitim Bakanlığı",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "school calendar and exams",
+        "official regulations",
+        "curriculum and school levels",
+        "scholarships and student support"
+      ],
+      "language": "tr",
+      "authority_score": 0.95,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.meb.gov.tr"
+        ],
+        "search_templates": [
+          "{information_need} Türkiye eğitim site:{domain}",
+          "MEB {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "date",
+          "school year",
+          "grade level",
+          "rule",
+          "official announcement"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Primary official source for K-12 education in Turkey."
+    },
+    {
+      "source_id": "osym",
+      "domain": "osym.gov.tr",
+      "name": "ÖSYM",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "school calendar and exams",
+        "higher education and universities",
+        "official regulations"
+      ],
+      "language": "tr",
+      "authority_score": 0.95,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.osym.gov.tr"
+        ],
+        "search_templates": [
+          "ÖSYM {information_need} site:{domain}",
+          "YKS KPSS sınav takvimi site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "exam",
+          "date",
+          "application period",
+          "result date",
+          "guide"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Official source for national exams and placement processes."
+    },
+    {
+      "source_id": "yok",
+      "domain": "yok.gov.tr",
+      "name": "Yükseköğretim Kurulu",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "higher education and universities",
+        "official regulations"
+      ],
+      "language": "tr",
+      "authority_score": 0.92,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.yok.gov.tr"
+        ],
+        "search_templates": [
+          "YÖK {information_need} site:{domain}",
+          "yükseköğretim {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "university",
+          "program",
+          "regulation",
+          "decision",
+          "date"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Official source for higher education rules and announcements."
+    },
+    {
+      "source_id": "gsb_kyk",
+      "domain": "gsb.gov.tr",
+      "name": "Gençlik ve Spor Bakanlığı",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "scholarships and student support"
+      ],
+      "language": "tr",
+      "authority_score": 0.88,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.gsb.gov.tr"
+        ],
+        "search_templates": [
+          "KYK burs kredi yurt başvuru site:{domain}",
+          "{information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "support type",
+          "eligibility",
+          "application date",
+          "amount",
+          "institution"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "Official source for KYK-style student support and dormitory announcements."
+    },
+    {
+      "source_id": "tvf",
+      "domain": "tvf.org.tr",
+      "name": "Türkiye Voleybol Federasyonu",
+      "supported_topics": [
+        "Türkiye'de voleybol"
+      ],
+      "supported_information_needs": [
+        "fixtures results and standings",
+        "national teams and tournaments",
+        "club news and transfers",
+        "league structure and rules",
+        "player and club profiles"
+      ],
+      "language": "tr",
+      "authority_score": 0.95,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.tvf.org.tr"
+        ],
+        "search_templates": [
+          "TVF {information_need} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "fixture",
+          "result",
+          "standing",
+          "team",
+          "rule",
+          "date"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Primary official source for volleyball in Turkey."
+    },
+    {
+      "source_id": "trtspor_volleyball",
+      "domain": "trtspor.com.tr",
+      "name": "TRT Spor",
+      "supported_topics": [
+        "Türkiye'de voleybol",
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "national teams and tournaments",
+        "club news and transfers",
+        "player and club profiles",
+        "international fixtures and standings",
+        "major tournaments and qualifiers",
+        "transfer news"
+      ],
+      "language": "tr",
+      "authority_score": 0.78,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.trtspor.com.tr"
+        ],
+        "search_templates": [
+          "{information_need} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "team",
+          "player",
+          "match",
+          "date",
+          "competition"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter approved Turkish sports news source for volleyball and world football."
+    },
+    {
+      "source_id": "voleybolunsesi",
+      "domain": "voleybolunsesi.com",
+      "name": "Voleybolun Sesi",
+      "supported_topics": [
+        "Türkiye'de voleybol"
+      ],
+      "supported_information_needs": [
+        "club news and transfers",
+        "national teams and tournaments",
+        "player and club profiles"
+      ],
+      "language": "tr",
+      "authority_score": 0.65,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.voleybolunsesi.com"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "voleybol transfer haberleri site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "club",
+          "player",
+          "coach",
+          "transfer status",
+          "date"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Specialized volleyball news source for recent club and transfer context."
+    },
+    {
+      "source_id": "fifa",
+      "domain": "fifa.com",
+      "name": "FIFA",
+      "supported_topics": [
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "international fixtures and standings",
+        "major tournaments and qualifiers",
+        "rules rankings and governance"
+      ],
+      "language": "en",
+      "authority_score": 0.95,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.fifa.com"
+        ],
+        "search_templates": [
+          "FIFA {information_need} site:{domain}",
+          "world football {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "fixture",
+          "ranking",
+          "tournament",
+          "rule",
+          "date"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Official global football source."
+    },
+    {
+      "source_id": "uefa",
+      "domain": "uefa.com",
+      "name": "UEFA",
+      "supported_topics": [
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "international fixtures and standings",
+        "major tournaments and qualifiers",
+        "rules rankings and governance",
+        "player club and league profiles"
+      ],
+      "language": "en",
+      "authority_score": 0.92,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent",
+        "versioned",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.uefa.com"
+        ],
+        "search_templates": [
+          "UEFA {information_need} site:{domain}",
+          "European football {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "competition",
+          "fixture",
+          "group",
+          "rule",
+          "date"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Official European football source."
+    },
+    {
+      "source_id": "transfermarkt_global",
+      "domain": "transfermarkt.com",
+      "name": "Transfermarkt",
+      "supported_topics": [
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "transfer news",
+        "player club and league profiles"
+      ],
+      "language": "en",
+      "authority_score": 0.76,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.transfermarkt.com"
+        ],
+        "search_templates": [
+          "football transfers site:{domain}",
+          "{information_need} world football site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "player",
+          "club",
+          "league",
+          "transfer status",
+          "market value"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Structured global football transfer and profile source."
+    },
+    {
+      "source_id": "goal_tr",
+      "domain": "goal.com",
+      "name": "Goal",
+      "supported_topics": [
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "transfer news",
+        "major tournaments and qualifiers",
+        "player club and league profiles"
+      ],
+      "language": "tr",
+      "authority_score": 0.68,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.goal.com/tr"
+        ],
+        "search_templates": [
+          "{information_need} dünya futbolu site:{domain}/tr",
+          "{topic} {information_need} site:{domain}/tr"
+        ],
+        "fields_to_preserve": [
+          "player",
+          "club",
+          "league",
+          "date",
+          "source attribution"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Turkish-language global football news source."
+    },
+    {
+      "source_id": "yemek_com_world",
+      "domain": "yemek.com",
+      "name": "Yemek.com Dünya Mutfağı",
+      "supported_topics": [
+        "Dünya mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular international recipes",
+        "regional cuisines and signature dishes",
+        "ingredients and substitutions",
+        "cooking techniques",
+        "recent food trends"
+      ],
+      "language": "tr",
+      "authority_score": 0.72,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://yemek.com"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "dünya mutfağı tarifleri site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "country",
+          "tips"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter Turkish-language source for practical world cuisine recipes."
+    },
+    {
+      "source_id": "lezzet_world",
+      "domain": "lezzet.com.tr",
+      "name": "Lezzet Dünya Mutfağı",
+      "supported_topics": [
+        "Dünya mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular international recipes",
+        "regional cuisines and signature dishes",
+        "ingredients and substitutions",
+        "cooking techniques",
+        "recent food trends"
+      ],
+      "language": "tr",
+      "authority_score": 0.7,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.lezzet.com.tr"
+        ],
+        "search_templates": [
+          "{topic} {information_need} site:{domain}",
+          "uluslararası yemek tarifleri site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "country",
+          "serving count"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Starter source for Turkish explanations of international recipes and cuisines."
+    },
+    {
+      "source_id": "nefisyemektarifleri_world",
+      "domain": "nefisyemektarifleri.com",
+      "name": "Nefis Yemek Tarifleri Dünya Mutfağı",
+      "supported_topics": [
+        "Dünya mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular international recipes",
+        "regional cuisines and signature dishes",
+        "cooking techniques"
+      ],
+      "language": "tr",
+      "authority_score": 0.68,
+      "update_frequency": "daily",
+      "popularity_metric": "rating_count",
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.nefisyemektarifleri.com"
+        ],
+        "search_templates": [
+          "dünya mutfağı tarifleri site:{domain}",
+          "{information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "rating",
+          "rating count"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Recipe source where popularity metadata can later be parsed."
+    },
+    {
+      "source_id": "ttk",
+      "domain": "ttk.gov.tr",
+      "name": "Türk Tarih Kurumu",
+      "supported_topics": [
+        "Türk tarihi"
+      ],
+      "supported_information_needs": [
+        "historical periods and timeline",
+        "key events and turning points",
+        "historical figures",
+        "recent research and publications"
+      ],
+      "language": "tr",
+      "authority_score": 0.93,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.ttk.gov.tr"
+        ],
+        "search_templates": [
+          "Türk tarihi {information_need} site:{domain}",
+          "Türk Tarih Kurumu {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "period",
+          "event",
+          "date",
+          "person",
+          "publication"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Official history institution source."
+    },
+    {
+      "source_id": "islam_ansiklopedisi",
+      "domain": "islamansiklopedisi.org.tr",
+      "name": "TDV İslam Ansiklopedisi",
+      "supported_topics": [
+        "Türk tarihi"
+      ],
+      "supported_information_needs": [
+        "historical periods and timeline",
+        "key events and turning points",
+        "historical figures"
+      ],
+      "language": "tr",
+      "authority_score": 0.88,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://islamansiklopedisi.org.tr"
+        ],
+        "search_templates": [
+          "Türk tarihi {information_need} site:{domain}",
+          "{information_need} Osmanlı Selçuklu site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "person",
+          "period",
+          "event",
+          "source",
+          "bibliography"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Authoritative encyclopedia-style source for historical figures and periods."
+    },
+    {
+      "source_id": "kultur_portali_history",
+      "domain": "kulturportali.gov.tr",
+      "name": "Kültür Portalı Tarih",
+      "supported_topics": [
+        "Türk tarihi"
+      ],
+      "supported_information_needs": [
+        "key events and turning points",
+        "institutions sources and museums",
+        "historical periods and timeline"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.kulturportali.gov.tr"
+        ],
+        "search_templates": [
+          "Türk tarihi {information_need} site:{domain}",
+          "müze tarih koleksiyon site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "institution",
+          "museum",
+          "collection",
+          "location",
+          "history"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Official cultural source for museums, collections, and public history."
+    },
+    {
+      "source_id": "dergipark_history",
+      "domain": "dergipark.org.tr",
+      "name": "DergiPark Tarih",
+      "supported_topics": [
+        "Türk tarihi"
+      ],
+      "supported_information_needs": [
+        "recent research and publications",
+        "historical periods and timeline",
+        "key events and turning points"
+      ],
+      "language": "tr",
+      "authority_score": 0.78,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://dergipark.org.tr"
+        ],
+        "search_templates": [
+          "Türk tarihi araştırma makale site:{domain}",
+          "{information_need} Türk tarihi site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "publication",
+          "author",
+          "date",
+          "abstract",
+          "journal"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Academic source for recent and evergreen history research."
+    }
+  ]
+}
