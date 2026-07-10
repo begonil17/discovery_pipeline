@@ -4,6 +4,7 @@ from src.schemas.seed import Seed
 
 seeds = [
     "Türk mutfağı",
+    "Türk kültürü",
     "Türkiye'de futbol",
     "Türkiye'de eğitim",
     "Türkiye'de voleybol",

@@ -1117,6 +1117,216 @@
       },
       "status": "active",
       "notes": "Academic source for recent and evergreen history research."
+    },
+    {
+      "source_id": "kultur_portali_culture",
+      "domain": "kulturportali.gov.tr",
+      "name": "Kültür Portalı Türk Kültürü",
+      "supported_topics": [
+        "Türk kültürü"
+      ],
+      "supported_information_needs": [
+        "everyday traditions and customs",
+        "festivals and celebrations",
+        "folk arts crafts and music",
+        "language proverbs and oral culture",
+        "cultural heritage institutions and resources"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.kulturportali.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{query} Türk kültürü site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "tradition",
+          "region",
+          "history",
+          "cultural meaning",
+          "institution"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Official cultural portal for traditions, folk culture, heritage, and regional culture."
+    },
+    {
+      "source_id": "ktb_culture",
+      "domain": "ktb.gov.tr",
+      "name": "Kültür ve Turizm Bakanlığı",
+      "supported_topics": [
+        "Türk kültürü"
+      ],
+      "supported_information_needs": [
+        "festivals and celebrations",
+        "cultural heritage institutions and resources",
+        "folk arts crafts and music"
+      ],
+      "language": "tr",
+      "authority_score": 0.92,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "versioned",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.ktb.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{query} Kültür ve Turizm Bakanlığı site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "institution",
+          "heritage item",
+          "event",
+          "date",
+          "official source"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Primary ministry source for official cultural and heritage information."
+    },
+    {
+      "source_id": "aregem",
+      "domain": "aregem.ktb.gov.tr",
+      "name": "AREGEM",
+      "supported_topics": [
+        "Türk kültürü"
+      ],
+      "supported_information_needs": [
+        "everyday traditions and customs",
+        "festivals and celebrations",
+        "folk arts crafts and music",
+        "language proverbs and oral culture",
+        "cultural heritage institutions and resources"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://aregem.ktb.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{query} halk kültürü site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "tradition",
+          "folk culture",
+          "region",
+          "practice",
+          "heritage item"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Official ministry research source for folk culture and intangible heritage."
+    },
+    {
+      "source_id": "tdk",
+      "domain": "tdk.gov.tr",
+      "name": "Türk Dil Kurumu",
+      "supported_topics": [
+        "Türk kültürü"
+      ],
+      "supported_information_needs": [
+        "language proverbs and oral culture"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://tdk.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{query} Türk Dil Kurumu site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "expression",
+          "meaning",
+          "usage",
+          "source"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "Official language source for proverbs, idioms, and Turkish language culture."
+    },
+    {
+      "source_id": "unesco_tr",
+      "domain": "unesco.org.tr",
+      "name": "UNESCO Türkiye Milli Komisyonu",
+      "supported_topics": [
+        "Türk kültürü"
+      ],
+      "supported_information_needs": [
+        "festivals and celebrations",
+        "cultural heritage institutions and resources",
+        "folk arts crafts and music"
+      ],
+      "language": "tr",
+      "authority_score": 0.85,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.unesco.org.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{query} UNESCO Türkiye site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "heritage item",
+          "list",
+          "date",
+          "location",
+          "cultural meaning"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "UNESCO Turkey source for cultural heritage and intangible heritage references."
     }
   ]
 }

@@ -151,6 +151,132 @@
       ]
     },
     {
+      "topic": "Türk kültürü",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "everyday traditions and customs",
+          "description": "Common Turkish customs, family and social life traditions, hospitality, weddings, holidays, and daily cultural practices.",
+          "candidate_queries": [
+            "Türk misafirperverliği gelenekleri",
+            "Türk düğün gelenekleri",
+            "bayram gelenekleri Türkiye"
+          ],
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "practical and culturally representative customs",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "tradition",
+            "occasion",
+            "region",
+            "meaning",
+            "practice"
+          ]
+        },
+        {
+          "name": "festivals and celebrations",
+          "description": "National, religious, seasonal, and local celebrations, festivals, rituals, calendars, and regional variations.",
+          "candidate_queries": [
+            "Hıdırellez gelenekleri",
+            "Nevruz Türkiye gelenekleri",
+            "yerel festival gelenekleri Türkiye"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 365,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "seasonal and regional cultural events",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "festival",
+            "date",
+            "region",
+            "ritual",
+            "cultural meaning"
+          ]
+        },
+        {
+          "name": "folk arts crafts and music",
+          "description": "Traditional Turkish arts, handicrafts, music, dance, instruments, motifs, and regional artistic practices.",
+          "candidate_queries": [
+            "ebru sanatı",
+            "Türk halk müziği gelenekleri",
+            "halı kilim motifleri anlamları"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "foundational and practical cultural arts coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "art form",
+            "material",
+            "region",
+            "technique",
+            "symbolic meaning"
+          ]
+        },
+        {
+          "name": "language proverbs and oral culture",
+          "description": "Turkish proverbs, idioms, oral storytelling, folk tales, shadow play, epics, and language-related cultural knowledge.",
+          "candidate_queries": [
+            "Türk atasözleri anlamları",
+            "Dede Korkut hikayeleri",
+            "Karagöz Hacivat geleneği"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "useful oral and language culture references",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "expression",
+            "meaning",
+            "story",
+            "character",
+            "cultural context"
+          ]
+        },
+        {
+          "name": "cultural heritage institutions and resources",
+          "description": "Official cultural heritage lists, museums, archives, cultural institutions, UNESCO records, and public cultural resources.",
+          "candidate_queries": [
+            "Türkiye somut olmayan kültürel miras listesi",
+            "UNESCO Türkiye kültürel miras",
+            "Kültür Portalı Türk kültürü"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative heritage and institution references",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "heritage item",
+            "institution",
+            "location",
+            "list",
+            "source"
+          ]
+        }
+      ]
+    },
+    {
       "topic": "Türkiye'de futbol",
       "language": "tr",
       "information_needs": [
