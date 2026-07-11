@@ -153,6 +153,7 @@ def scoring_node(state):
     topic_plan = state["topic_plan"]
     sources = state["sources"]
     candidates = state["candidates"]
+    document_budget = state.get("document_budget")
     artifact_store = ArtifactStore()
 
     scored_checkpoint = artifact_store.load_json(
@@ -177,6 +178,9 @@ def scoring_node(state):
             for item in selected_checkpoint
         ]
 
+        if isinstance(document_budget, int):
+            selected = selected[: max(1, document_budget)]
+
         print(
             f"Loaded {len(selected)} selected candidates "
             "from checkpoint."
@@ -187,9 +191,47 @@ def scoring_node(state):
             "selected_candidates": selected,
         }
 
+    selection_config = {
+        **config.selection_config(),
+    }
+
+    if isinstance(document_budget, int):
+        document_budget = max(1, document_budget)
+        need_count = max(1, len(topic_plan.information_needs))
+        per_need_budget = max(
+            1,
+            (document_budget + need_count - 1) // need_count,
+        )
+        topic_limit = selection_config.get(
+            "max_selected_items_per_topic",
+        )
+        need_limit = selection_config.get(
+            "max_selected_items_per_need",
+        )
+
+        if isinstance(need_limit, int):
+            selection_config["max_selected_items_per_need"] = min(
+                need_limit,
+                per_need_budget,
+            )
+        else:
+            selection_config["max_selected_items_per_need"] = (
+                per_need_budget
+            )
+
+        if isinstance(topic_limit, int):
+            selection_config["max_selected_items_per_topic"] = min(
+                topic_limit,
+                document_budget,
+            )
+        else:
+            selection_config["max_selected_items_per_topic"] = (
+                document_budget
+            )
+
     scorer = CandidateScorer(
         weights=config.scoring_weights(),
-        selection_config=config.selection_config(),
+        selection_config=selection_config,
     )
 
     scored = scorer.score(
@@ -253,14 +295,27 @@ def fetcher_node(state):
     selected = state["selected_candidates"]
     config = SourceFirstConfig()
     fetching_config = config.fetching_config()
-    max_documents_per_topic = fetching_config.get(
-        "max_documents_per_topic",
-    )
+    max_documents_for_seed = state.get("document_budget")
 
-    if isinstance(max_documents_per_topic, int):
-        max_documents_per_topic = max(1, max_documents_per_topic)
+    if not isinstance(max_documents_for_seed, int):
+        max_documents_for_seed = fetching_config.get(
+            "max_documents_per_topic",
+        )
+
+    if not isinstance(max_documents_for_seed, int):
+        max_documents_for_seed = fetching_config.get(
+            "max_documents_per_seed",
+        )
+
+    if not isinstance(max_documents_for_seed, int):
+        max_documents_for_seed = fetching_config.get(
+            "max_documents_per_run",
+        )
+
+    if isinstance(max_documents_for_seed, int):
+        max_documents_for_seed = max(1, max_documents_for_seed)
     else:
-        max_documents_per_topic = None
+        max_documents_for_seed = None
 
     need_by_name = _need_by_name(topic_plan.information_needs)
     source_by_id = _source_by_id(state["sources"])
@@ -333,8 +388,8 @@ def fetcher_node(state):
 
     def fetch_document_cap_reached() -> bool:
         return (
-            max_documents_per_topic is not None
-            and len(documents) >= max_documents_per_topic
+            max_documents_for_seed is not None
+            and len(documents) >= max_documents_for_seed
         )
 
     def save_fetch_checkpoints():
@@ -359,7 +414,7 @@ def fetcher_node(state):
         if fetch_document_cap_reached():
             print(
                 "Fetch document cap reached "
-                f"({len(documents)}/{max_documents_per_topic}); "
+                f"({len(documents)}/{max_documents_for_seed}); "
                 "stopping fetch."
             )
             save_fetch_checkpoints()
@@ -508,7 +563,7 @@ def fetcher_node(state):
         if hit_fetch_limit:
             print(
                 "Fetch document cap reached "
-                f"({len(documents)}/{max_documents_per_topic}); "
+                f"({len(documents)}/{max_documents_for_seed}); "
                 "stopping fetch."
             )
             save_fetch_checkpoints()

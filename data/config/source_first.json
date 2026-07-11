@@ -156,7 +156,7 @@
     "max_source_share_per_need": 1.0
   },
   "fetching": {
-    "max_documents_per_topic": 500
+    "max_documents_per_run": 500
   },
   "manual_candidates": [],
   "scoring_weights": {

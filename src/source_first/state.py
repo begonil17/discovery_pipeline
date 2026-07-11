@@ -19,3 +19,7 @@ class SourceFirstState(TypedDict, total=False):
     selected_candidates: list[ScoredCandidate]
     documents: list[NormalizedDocument]
     errors: list[str]
+    document_budget: int | None
+    run_document_budget: int | None
+    run_seed_count: int
+    run_seed_index: int
