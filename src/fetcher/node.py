@@ -35,7 +35,8 @@ def fetcher_node(state):
         print("-" * 50)
 
         documents = []
-        seen_urls = set()
+        searched_urls = set()
+        document_urls = set()
         saved_urls = existing_document_urls(entity)
 
         for task in entity.search_plan.tasks:
@@ -51,7 +52,7 @@ def fetcher_node(state):
                 if not url:
                     continue
 
-                if url in seen_urls:
+                if url in searched_urls:
 
                     print(
                         "Skipping duplicate search result: "
@@ -60,7 +61,7 @@ def fetcher_node(state):
 
                     continue
 
-                seen_urls.add(url)
+                searched_urls.add(url)
 
                 if url in saved_urls:
 
@@ -75,15 +76,36 @@ def fetcher_node(state):
                     f"Fetching: {url}"
                 )
 
-                document = client.fetch(
-                    url
+                fetched_documents = client.fetch_many(
+                    url,
+                    objective_context=task.information,
                 )
 
-                if document is None:
+                if not fetched_documents:
 
                     continue
 
-                documents.append(document)
+                for document in fetched_documents:
+
+                    document_url = document.url.strip()
+
+                    if not document_url:
+                        continue
+
+                    if (
+                        document_url in document_urls
+                        or document_url in saved_urls
+                    ):
+
+                        print(
+                            "Skipping duplicate fetched document: "
+                            f"{document_url}"
+                        )
+
+                        continue
+
+                    document_urls.add(document_url)
+                    documents.append(document)
 
         entity.documents = documents
         save_documents(entity)
