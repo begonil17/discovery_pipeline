@@ -3,6 +3,10 @@ import time
 
 from tavily import TavilyClient
 
+from src.fetcher.local_extractors import (
+    LocalExtractionError,
+    LocalExtractor,
+)
 from src.fetcher.schemas import Document
 
 from urllib.parse import urlparse
@@ -17,6 +21,7 @@ from src.config.settings import (
     FETCHER_BATCH_SAFE_LENGTH,
     FETCHER_MODEL,
     FETCHER_SAFE_LENGTH,
+    SEARCH_PAGE_FALLBACK_LINK_LIMIT,
 )
 
 from src.llm.client import (
@@ -33,6 +38,7 @@ class FetcherClient:
     def __init__(self):
 
         self.tavily = TavilyClient()
+        self.local_extractor = LocalExtractor()
 
     def extract_source(self, url: str) -> str:
         return urlparse(url).netloc
@@ -665,21 +671,12 @@ class FetcherClient:
 
         return cleaned_chunks
 
-    def fetch(self, url: str) -> Document | None:
-
-        print(f"Fetching from Tavily... {url}")
-
-        try:
-
-            title, text = self.extract_from_tavily(url)
-
-        except Exception as e:
-
-            print(f"Failed to extract from Tavily: {url}")
-
-            print(e)
-
-            return None
+    def build_document(
+        self,
+        url: str,
+        title: str,
+        text: str,
+    ) -> Document | None:
 
         print(f"Extracted length: {len(text)}")
 
@@ -743,3 +740,157 @@ class FetcherClient:
             text=cleaned,
             source=self.extract_source(url),
         )
+
+    def fetch_locally(
+        self,
+        url: str,
+    ) -> Document | None:
+
+        print(f"Trying local fallback extraction... {url}")
+
+        try:
+            extracted = self.local_extractor.extract(url)
+
+        except LocalExtractionError as e:
+
+            print(f"Local fallback failed: {url}")
+            print(e)
+
+            return None
+
+        except Exception as e:
+
+            print(f"Local fallback failed unexpectedly: {url}")
+            print(e)
+
+            return None
+
+        return self.build_document(
+            extracted.url,
+            extracted.title,
+            extracted.text,
+        )
+
+    def fetch_linked_documents(
+        self,
+        url: str,
+    ) -> list[Document]:
+
+        print(
+            "Trying local search-page link resolution... "
+            f"{url}"
+        )
+
+        try:
+            candidates = (
+                self.local_extractor.discover_document_links(
+                    url,
+                    limit=SEARCH_PAGE_FALLBACK_LINK_LIMIT,
+                )
+            )
+
+        except Exception as e:
+
+            print(
+                "Could not discover document links from "
+                f"{url}"
+            )
+            print(e)
+
+            return []
+
+        if not candidates:
+
+            print("No local fallback links found.")
+
+            return []
+
+        documents = []
+
+        for index, candidate in enumerate(
+            candidates,
+            start=1,
+        ):
+
+            print(
+                f"Fallback link [{index}/{len(candidates)}]: "
+                f"{candidate.url}"
+            )
+
+            if self.local_extractor.is_likely_search_page(
+                candidate.url
+            ):
+
+                print(
+                    "Skipping nested search/result page: "
+                    f"{candidate.url}"
+                )
+
+                continue
+
+            document = self.fetch(candidate.url)
+
+            if document is not None:
+                documents.append(document)
+
+        return documents
+
+    def fetch_many(
+        self,
+        url: str,
+    ) -> list[Document]:
+
+        if self.local_extractor.is_likely_search_page(url):
+
+            documents = self.fetch_linked_documents(url)
+
+            if documents:
+                return documents
+
+        document = self.fetch(url)
+
+        if document is None:
+            return []
+
+        return [document]
+
+    def fetch(self, url: str) -> Document | None:
+
+        print(f"Fetching from Tavily... {url}")
+
+        try:
+
+            title, text = self.extract_from_tavily(url)
+
+        except Exception as e:
+
+            print(f"Failed to extract from Tavily: {url}")
+
+            print(e)
+
+            if self.local_extractor.is_likely_search_page(url):
+
+                print(
+                    "URL looks like a search/results page; "
+                    "direct local text extraction skipped."
+                )
+
+                return None
+
+            return self.fetch_locally(url)
+
+        document = self.build_document(
+            url,
+            title,
+            text,
+        )
+
+        if document is not None:
+            return document
+
+        print(
+            "Tavily returned empty content; "
+            "trying local fallback."
+        )
+
+        return self.fetch_locally(url)
