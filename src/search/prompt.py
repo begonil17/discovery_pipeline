@@ -34,7 +34,9 @@ Source selection rules
 - Prefer official organizations.
 - Prefer Wikipedia in Turkish.
 - Prefer high-quality pages.
-- Avoid duplicate websites.
+- Avoid exact duplicate pages.
+- It is acceptable to use multiple pages from the same comprehensive
+  website when those pages cover different requested information.
 - Avoid English pages unless no suitable Turkish page exists.
 
 Return ONLY JSON.

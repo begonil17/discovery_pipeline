@@ -55,6 +55,12 @@ FETCHER_MODEL = "gemini-3.5-flash"
 REQUEST_TIMEOUT = 60
 
 # -----------------------
+# Search
+# -----------------------
+
+SEARCH_RESULTS_PER_TASK = 5
+
+# -----------------------
 # Fetcher
 # -----------------------
 

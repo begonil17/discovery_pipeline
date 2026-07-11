@@ -3,6 +3,7 @@ import os
 
 from src.config.settings import (
     SEARCH_MODEL,
+    SEARCH_RESULTS_PER_TASK,
 )
 
 from src.llm.client import LLMClient
@@ -20,9 +21,12 @@ def search_node(state):
 
     client = LLMClient()
     
-    tavily = TavilyClient(
-        api_key=os.getenv(TAVILY_API_KEY)
-    )
+    if TAVILY_API_KEY:
+        tavily = TavilyClient(
+            api_key=TAVILY_API_KEY,
+        )
+    else:
+        tavily = TavilyClient()
 
     entities = state["discovered_entities"]
 
@@ -50,7 +54,7 @@ def search_node(state):
 
             response = tavily.search(
                 query=task.query,
-                max_results=2,
+                max_results=SEARCH_RESULTS_PER_TASK,
             )
 
             task.results = [
