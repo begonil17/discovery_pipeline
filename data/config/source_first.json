@@ -146,7 +146,7 @@
     "exploration_budget_ratio": 0.1
   },
   "selection": {
-    "max_selected_items_per_need": 8,
+    "max_selected_items_per_need": 12,
     "allocation": {
       "popular": 0.6,
       "foundational": 0.25,
