@@ -39,3 +39,6 @@ class SourceFirstConfig:
 
     def candidate_listing_config(self) -> dict[str, Any]:
         return self.data.get("candidate_listing", {})
+
+    def manual_candidates(self) -> list[dict[str, Any]]:
+        return self.data.get("manual_candidates", [])

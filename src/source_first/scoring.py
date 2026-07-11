@@ -225,6 +225,39 @@ class CandidateScorer:
             scores.final_score,
         )
 
+    def _configured_need_limit(
+        self,
+        topic_plan: TopicPlan,
+        need: InformationNeed,
+    ) -> int:
+
+        by_topic = self.selection_config.get(
+            "max_selected_items_by_topic",
+            {},
+        )
+        topic_override = by_topic.get(topic_plan.topic)
+
+        if isinstance(topic_override, int):
+            return max(1, topic_override)
+
+        if isinstance(topic_override, dict):
+            need_override = topic_override.get(need.name)
+
+            if need_override is None:
+                need_override = topic_override.get("*")
+
+            if isinstance(need_override, int):
+                return max(1, need_override)
+
+        global_override = self.selection_config.get(
+            "max_selected_items_per_need",
+        )
+
+        if isinstance(global_override, int):
+            return max(1, global_override)
+
+        return need.max_selected_items
+
     def select(
         self,
         scored: list[ScoredCandidate],
@@ -256,7 +289,10 @@ class CandidateScorer:
             if not items:
                 continue
 
-            need_limit = need.max_selected_items
+            need_limit = self._configured_need_limit(
+                topic_plan,
+                need,
+            )
             source_limit = max(1, int(need_limit * max_share))
             selected_ids = set()
             source_counts = defaultdict(int)

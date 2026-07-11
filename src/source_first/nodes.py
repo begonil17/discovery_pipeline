@@ -1,6 +1,9 @@
 from src.fetcher.client import FetcherClient
 from src.source_first.artifacts import ArtifactStore
-from src.source_first.candidate_listing import CandidateLister
+from src.source_first.candidate_listing import (
+    CandidateLister,
+    candidate_id_for,
+)
 from src.source_first.config import SourceFirstConfig
 from src.source_first.document_store import RawDocumentStore
 from src.source_first.registry import SourceRegistry
@@ -98,6 +101,14 @@ def candidate_listing_node(state):
             "max_results_per_source_need",
             10,
         ),
+        max_sources_per_information_need=listing_config.get(
+            "max_sources_per_information_need",
+        ),
+        source_ids_by_information_need=listing_config.get(
+            "source_ids_by_information_need",
+            {},
+        ),
+        manual_candidates=config.manual_candidates(),
     )
 
     try:
@@ -253,6 +264,10 @@ def fetcher_node(state):
         document.candidate_id
         for document in documents
     }
+    document_ids = {
+        document.document_id
+        for document in documents
+    }
     progress = artifact_store.load_json(
         topic_plan.topic,
         "fetch_progress.json",
@@ -273,6 +288,12 @@ def fetcher_node(state):
         "failed",
         [],
     )
+    completed_ids.update(
+        progress.get(
+            "completed_candidate_ids",
+            [],
+        )
+    )
     errors = list(state.get("errors", []))
 
     def append_unique(
@@ -281,6 +302,16 @@ def fetcher_node(state):
     ):
         if value not in progress[key]:
             progress[key].append(value)
+
+    def append_document(
+        document: NormalizedDocument,
+    ) -> bool:
+        if document.document_id in document_ids:
+            return False
+
+        documents.append(document)
+        document_ids.add(document.document_id)
+        return True
 
     def save_fetch_checkpoints():
         artifact_store.save_json(
@@ -314,7 +345,7 @@ def fetcher_node(state):
             existing_document = store.load_for_candidate(candidate)
 
             if existing_document is not None:
-                documents.append(existing_document)
+                append_document(existing_document)
                 completed_ids.add(candidate.candidate_id)
                 append_unique(
                     "completed_candidate_ids",
@@ -351,12 +382,12 @@ def fetcher_node(state):
             f"{candidate.information_need}: {candidate.url}"
         )
 
-        document = fetcher.fetch(
+        fetched_documents = fetcher.fetch_many(
             candidate.url,
             objective_context=objective.to_prompt_context(),
         )
 
-        if document is None:
+        if not fetched_documents:
             errors.append(
                 f"Fetch failed for {candidate.url}"
             )
@@ -370,18 +401,80 @@ def fetcher_node(state):
             save_fetch_checkpoints()
             continue
 
-        normalized = store.normalize(
-            candidate,
-            source,
-            objective,
-            document,
-        )
-        store.save(normalized)
-        documents.append(normalized)
+        saved_count = 0
+
+        for document in fetched_documents:
+
+            document_url = document.url.strip() or candidate.url
+
+            if document_url == candidate.url:
+                document_candidate = candidate
+            else:
+                document_candidate = candidate.model_copy(
+                    update={
+                        "candidate_id": candidate_id_for(
+                            candidate.source_id,
+                            candidate.information_need,
+                            document_url,
+                        ),
+                        "url": document_url,
+                        "title": (
+                            document.title
+                            or candidate.title
+                        ),
+                        "metadata": {
+                            **candidate.metadata,
+                            "expanded_from_candidate_id": (
+                                candidate.candidate_id
+                            ),
+                            "expanded_from_url": candidate.url,
+                        },
+                    }
+                )
+
+            if store.exists(document_candidate):
+                existing_document = store.load_for_candidate(
+                    document_candidate
+                )
+
+                if existing_document is not None:
+                    append_document(existing_document)
+                    completed_ids.add(
+                        document_candidate.candidate_id
+                    )
+                    saved_count += 1
+
+                continue
+
+            normalized = store.normalize(
+                document_candidate,
+                source,
+                objective,
+                document,
+            )
+            store.save(normalized)
+            append_document(normalized)
+            completed_ids.add(document_candidate.candidate_id)
+            saved_count += 1
+
+        if saved_count == 0:
+            errors.append(
+                f"Fetch produced no new documents for {candidate.url}"
+            )
+            progress["failed"].append(
+                {
+                    "candidate_id": candidate.candidate_id,
+                    "url": candidate.url,
+                    "reason": "fetch returned only duplicate documents",
+                }
+            )
+            save_fetch_checkpoints()
+            continue
+
         completed_ids.add(candidate.candidate_id)
         append_unique(
             "completed_candidate_ids",
-            candidate.candidate_id
+            candidate.candidate_id,
         )
         save_fetch_checkpoints()
 

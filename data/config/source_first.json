@@ -1,16 +1,22 @@
 {
   "candidate_listing": {
-    "max_results_per_source_need": 8,
+    "max_results_per_source_need": 20,
+    "max_sources_per_information_need": 2,
+    "source_ids_by_information_need": {
+      "*": {}
+    },
     "exploration_budget_ratio": 0.1
   },
   "selection": {
+    "max_selected_items_per_need": 8,
     "allocation": {
       "popular": 0.6,
       "foundational": 0.25,
       "diverse": 0.15
     },
-    "max_source_share_per_need": 0.6
+    "max_source_share_per_need": 1.0
   },
+  "manual_candidates": [],
   "scoring_weights": {
     "relevance": 0.22,
     "information_need_importance": 0.18,

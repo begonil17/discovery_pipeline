@@ -57,10 +57,20 @@ class CandidateLister:
     def __init__(
         self,
         tavily: TavilyClient | None = None,
-        max_results_per_source_need: int = 10,
+        max_results_per_source_need: int | None = None,
+        max_sources_per_information_need: int | None = None,
+        source_ids_by_information_need: dict | None = None,
+        manual_candidates: list[dict] | None = None,
     ):
         self.tavily = tavily
         self.max_results_per_source_need = max_results_per_source_need
+        self.max_sources_per_information_need = (
+            max_sources_per_information_need
+        )
+        self.source_ids_by_information_need = (
+            source_ids_by_information_need or {}
+        )
+        self.manual_candidates = manual_candidates or []
 
     def _tavily_client(self) -> TavilyClient:
         if self.tavily is None:
@@ -126,6 +136,12 @@ class CandidateLister:
         if source.collection_strategy.method != "tavily_search":
             return []
 
+        max_results = (
+            self.max_results_per_source_need
+            if self.max_results_per_source_need is not None
+            else source.collection_strategy.max_candidates
+        )
+
         candidates = []
         seen_urls = set()
 
@@ -136,10 +152,7 @@ class CandidateLister:
         ):
             response = self._tavily_client().search(
                 query=query,
-                max_results=min(
-                    self.max_results_per_source_need,
-                    source.collection_strategy.max_candidates,
-                ),
+                max_results=max(1, int(max_results)),
             )
 
             for result in response.get("results", []):
@@ -181,6 +194,167 @@ class CandidateLister:
 
         return candidates
 
+    def source_ids_for_need(
+        self,
+        topic: str,
+        need_name: str,
+    ) -> list[str] | None:
+
+        topic_config = self.source_ids_by_information_need.get(
+            topic,
+        )
+
+        if topic_config is None:
+            topic_config = self.source_ids_by_information_need.get(
+                "*",
+            )
+
+        if topic_config is None:
+            return None
+
+        if isinstance(topic_config, list):
+            return topic_config
+
+        if not isinstance(topic_config, dict):
+            return None
+
+        source_ids = topic_config.get(need_name)
+
+        if source_ids is None:
+            source_ids = topic_config.get("*")
+
+        if isinstance(source_ids, list):
+            return source_ids
+
+        return None
+
+    def sources_for_need(
+        self,
+        topic: str,
+        need: InformationNeed,
+        sources: list[SourceProfile],
+    ) -> list[SourceProfile]:
+
+        allowed_source_ids = self.source_ids_for_need(
+            topic,
+            need.name,
+        )
+
+        if allowed_source_ids is not None:
+            source_by_id = {
+                source.source_id: source
+                for source in sources
+            }
+
+            return [
+                source_by_id[source_id]
+                for source_id in allowed_source_ids
+                if source_id in source_by_id
+            ]
+
+        matching = [
+            source
+            for source in sources
+            if source.supports_need(
+                topic,
+                need.name,
+            )
+        ]
+
+        matching = sorted(
+            matching,
+            key=lambda source: source.authority_score,
+            reverse=True,
+        )
+
+        if self.max_sources_per_information_need is not None:
+            matching = matching[
+                : self.max_sources_per_information_need
+            ]
+
+        return matching
+
+    def manual_candidates_for_need(
+        self,
+        topic: str,
+        need: InformationNeed,
+        sources: list[SourceProfile],
+    ) -> list[CandidateItem]:
+
+        source_by_id = {
+            source.source_id: source
+            for source in sources
+        }
+
+        candidates = []
+
+        for item in self.manual_candidates:
+
+            if not isinstance(item, dict):
+                print("Skipping non-object manual candidate.")
+                continue
+
+            if item.get("topic") != topic:
+                continue
+
+            if item.get("information_need") != need.name:
+                continue
+
+            url = (item.get("url") or "").strip()
+            source_id = (item.get("source_id") or "").strip()
+
+            if not url or not source_id:
+                print(
+                    "Skipping manual candidate without url "
+                    "or source_id."
+                )
+                continue
+
+            source = source_by_id.get(source_id)
+
+            if source is None:
+                print(
+                    "Skipping manual candidate with unknown "
+                    f"source_id {source_id}: {url}"
+                )
+                continue
+
+            metadata = item.get("metadata") or {}
+
+            if not isinstance(metadata, dict):
+                metadata = {}
+
+            try:
+                estimated_cost = float(
+                    item.get("estimated_cost", 1.0)
+                )
+
+            except (TypeError, ValueError):
+                estimated_cost = 1.0
+
+            candidates.append(
+                CandidateItem(
+                    candidate_id=candidate_id_for(
+                        source.source_id,
+                        need.name,
+                        url,
+                    ),
+                    topic=topic,
+                    information_need=need.name,
+                    source_id=source.source_id,
+                    source_domain=source.domain,
+                    title=item.get("title") or url,
+                    url=url,
+                    estimated_cost=estimated_cost,
+                    metadata={
+                        **metadata,
+                        "manual": True,
+                    },
+                )
+            )
+
+        return candidates
+
     def list_candidates(
         self,
         topic_plan: TopicPlan,
@@ -190,12 +364,27 @@ class CandidateLister:
         seen_keys = set()
 
         for need in topic_plan.information_needs:
-            for source in sources:
-                if not source.supports_need(
-                    topic_plan.topic,
-                    need.name,
-                ):
+            for candidate in self.manual_candidates_for_need(
+                topic_plan.topic,
+                need,
+                sources,
+            ):
+                key = (
+                    candidate.information_need,
+                    candidate.url,
+                )
+
+                if key in seen_keys:
                     continue
+
+                seen_keys.add(key)
+                candidates.append(candidate)
+
+            for source in self.sources_for_need(
+                topic_plan.topic,
+                need,
+                sources,
+            ):
 
                 for candidate in self.list_for_source_need(
                     topic_plan.topic,
