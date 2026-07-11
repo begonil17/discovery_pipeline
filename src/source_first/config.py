@@ -37,6 +37,9 @@ class SourceFirstConfig:
     def selection_config(self) -> dict[str, Any]:
         return self.data.get("selection", {})
 
+    def fetching_config(self) -> dict[str, Any]:
+        return self.data.get("fetching", {})
+
     def candidate_listing_config(self) -> dict[str, Any]:
         return self.data.get("candidate_listing", {})
 

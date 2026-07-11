@@ -251,6 +251,17 @@ def _source_by_id(
 def fetcher_node(state):
     topic_plan = state["topic_plan"]
     selected = state["selected_candidates"]
+    config = SourceFirstConfig()
+    fetching_config = config.fetching_config()
+    max_documents_per_topic = fetching_config.get(
+        "max_documents_per_topic",
+    )
+
+    if isinstance(max_documents_per_topic, int):
+        max_documents_per_topic = max(1, max_documents_per_topic)
+    else:
+        max_documents_per_topic = None
+
     need_by_name = _need_by_name(topic_plan.information_needs)
     source_by_id = _source_by_id(state["sources"])
     fetcher = FetcherClient()
@@ -313,9 +324,18 @@ def fetcher_node(state):
         if document.document_id in document_ids:
             return False
 
+        if fetch_document_cap_reached():
+            return False
+
         documents.append(document)
         document_ids.add(document.document_id)
         return True
+
+    def fetch_document_cap_reached() -> bool:
+        return (
+            max_documents_per_topic is not None
+            and len(documents) >= max_documents_per_topic
+        )
 
     def save_fetch_checkpoints():
         artifact_store.save_json(
@@ -336,6 +356,15 @@ def fetcher_node(state):
         selected,
         start=1,
     ):
+        if fetch_document_cap_reached():
+            print(
+                "Fetch document cap reached "
+                f"({len(documents)}/{max_documents_per_topic}); "
+                "stopping fetch."
+            )
+            save_fetch_checkpoints()
+            break
+
         candidate = scored_candidate.candidate
 
         if candidate.candidate_id in completed_ids:
@@ -406,8 +435,13 @@ def fetcher_node(state):
             continue
 
         saved_count = 0
+        hit_fetch_limit = False
 
         for document in fetched_documents:
+
+            if fetch_document_cap_reached():
+                hit_fetch_limit = True
+                break
 
             document_url = document.url.strip() or candidate.url
 
@@ -442,13 +476,20 @@ def fetcher_node(state):
                 )
 
                 if existing_document is not None:
-                    append_document(existing_document)
-                    completed_ids.add(
-                        document_candidate.candidate_id
-                    )
-                    saved_count += 1
+                    if append_document(existing_document):
+                        completed_ids.add(
+                            document_candidate.candidate_id
+                        )
+                        saved_count += 1
+                    elif fetch_document_cap_reached():
+                        hit_fetch_limit = True
+                        break
 
                 continue
+
+            if fetch_document_cap_reached():
+                hit_fetch_limit = True
+                break
 
             normalized = store.normalize(
                 document_candidate,
@@ -457,9 +498,21 @@ def fetcher_node(state):
                 document,
             )
             store.save(normalized)
-            append_document(normalized)
-            completed_ids.add(document_candidate.candidate_id)
-            saved_count += 1
+            if append_document(normalized):
+                completed_ids.add(document_candidate.candidate_id)
+                saved_count += 1
+            elif fetch_document_cap_reached():
+                hit_fetch_limit = True
+                break
+
+        if hit_fetch_limit:
+            print(
+                "Fetch document cap reached "
+                f"({len(documents)}/{max_documents_per_topic}); "
+                "stopping fetch."
+            )
+            save_fetch_checkpoints()
+            break
 
         if saved_count == 0:
             errors.append(

@@ -276,6 +276,14 @@ class CandidateScorer:
             "max_source_share_per_need",
             0.6,
         )
+        topic_limit = self.selection_config.get(
+            "max_selected_items_per_topic",
+        )
+
+        if isinstance(topic_limit, int):
+            topic_limit = max(1, topic_limit)
+        else:
+            topic_limit = None
 
         by_need = defaultdict(list)
 
@@ -284,7 +292,16 @@ class CandidateScorer:
 
         selected = []
 
+        def topic_limit_reached() -> bool:
+            return (
+                topic_limit is not None
+                and len(selected) >= topic_limit
+            )
+
         for need in topic_plan.information_needs:
+            if topic_limit_reached():
+                break
+
             items = by_need[need.name]
             if not items:
                 continue
@@ -298,6 +315,9 @@ class CandidateScorer:
             source_counts = defaultdict(int)
 
             for bucket, ratio in allocation.items():
+                if topic_limit_reached():
+                    break
+
                 bucket_quota = max(
                     1,
                     int(round(need_limit * ratio)),
@@ -313,7 +333,10 @@ class CandidateScorer:
                 )
 
                 for item in ordered:
-                    if len(selected_ids) >= need_limit:
+                    if (
+                        len(selected_ids) >= need_limit
+                        or topic_limit_reached()
+                    ):
                         break
 
                     candidate = item.candidate
@@ -349,7 +372,10 @@ class CandidateScorer:
                     ):
                         break
 
-            if len(selected_ids) < need_limit:
+            if (
+                len(selected_ids) < need_limit
+                and not topic_limit_reached()
+            ):
                 ordered = sorted(
                     items,
                     key=lambda item: item.scores.final_score,
@@ -359,7 +385,10 @@ class CandidateScorer:
                 for item in ordered:
                     candidate = item.candidate
 
-                    if len(selected_ids) >= need_limit:
+                    if (
+                        len(selected_ids) >= need_limit
+                        or topic_limit_reached()
+                    ):
                         break
 
                     if candidate.candidate_id in selected_ids:

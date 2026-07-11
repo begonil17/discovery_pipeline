@@ -146,13 +146,17 @@
     "exploration_budget_ratio": 0.1
   },
   "selection": {
-    "max_selected_items_per_need": 12,
+    "max_selected_items_per_need": 100,
+    "max_selected_items_per_topic": 500,
     "allocation": {
       "popular": 0.6,
       "foundational": 0.25,
       "diverse": 0.15
     },
     "max_source_share_per_need": 1.0
+  },
+  "fetching": {
+    "max_documents_per_topic": 500
   },
   "manual_candidates": [],
   "scoring_weights": {
