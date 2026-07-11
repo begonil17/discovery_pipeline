@@ -407,6 +407,45 @@
       "notes": "Primary official source for K-12 education in Turkey."
     },
     {
+      "source_id": "meb_mufredat",
+      "domain": "mufredat.meb.gov.tr",
+      "name": "MEB Öğretim Programları",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "curriculum and school levels"
+      ],
+      "language": "tr",
+      "authority_score": 0.94,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "versioned",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://mufredat.meb.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "MEB öğretim programları {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "school level",
+          "curriculum",
+          "course",
+          "grade",
+          "effective date"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Official MEB curriculum repository."
+    },
+    {
       "source_id": "osym",
       "domain": "osym.gov.tr",
       "name": "ÖSYM",
@@ -489,9 +528,48 @@
       "notes": "Official source for higher education rules and announcements."
     },
     {
+      "source_id": "yok_atlas",
+      "domain": "yokatlas.yok.gov.tr",
+      "name": "YÖK Atlas",
+      "supported_topics": [
+        "Türkiye'de eğitim"
+      ],
+      "supported_information_needs": [
+        "higher education and universities"
+      ],
+      "language": "tr",
+      "authority_score": 0.94,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://yokatlas.yok.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "YÖK Atlas üniversite program kontenjan site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "university",
+          "program",
+          "quota",
+          "admission",
+          "score"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Official YÖK program and quota information source."
+    },
+    {
       "source_id": "gsb_kyk",
-      "domain": "gsb.gov.tr",
-      "name": "Gençlik ve Spor Bakanlığı",
+      "domain": "kyk.gsb.gov.tr",
+      "name": "GSB KYK",
       "supported_topics": [
         "Türkiye'de eğitim"
       ],
@@ -509,7 +587,7 @@
       "collection_strategy": {
         "method": "tavily_search",
         "entry_points": [
-          "https://www.gsb.gov.tr"
+          "https://kyk.gsb.gov.tr"
         ],
         "search_templates": [
           "KYK burs kredi yurt başvuru site:{domain}",
@@ -661,6 +739,44 @@
       "notes": "Specialized volleyball news source for recent club and transfer context."
     },
     {
+      "source_id": "voleybolplus",
+      "domain": "voleybolplus.com",
+      "name": "Voleybol Plus",
+      "supported_topics": [
+        "Türkiye'de voleybol"
+      ],
+      "supported_information_needs": [
+        "club news and transfers"
+      ],
+      "language": "tr",
+      "authority_score": 0.66,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.voleybolplus.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "voleybol transfer haberleri site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "club",
+          "player",
+          "coach",
+          "transfer status",
+          "date"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Specialized Turkish volleyball news source from the manual source list."
+    },
+    {
       "source_id": "fifa",
       "domain": "fifa.com",
       "name": "FIFA",
@@ -787,6 +903,44 @@
       "notes": "Structured global football transfer and profile source."
     },
     {
+      "source_id": "the_athletic_fc",
+      "domain": "nytimes.com",
+      "name": "The Athletic FC",
+      "supported_topics": [
+        "Dünyada futbol"
+      ],
+      "supported_information_needs": [
+        "transfer news"
+      ],
+      "language": "en",
+      "authority_score": 0.82,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.nytimes.com/athletic/football"
+        ],
+        "search_templates": [
+          "{query} site:nytimes.com/athletic/football",
+          "football transfer news site:nytimes.com/athletic/football"
+        ],
+        "fields_to_preserve": [
+          "player",
+          "club",
+          "league",
+          "transfer status",
+          "date"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Manual source for high-quality global football transfer reporting."
+    },
+    {
       "source_id": "goal_tr",
       "domain": "goal.com",
       "name": "Goal",
@@ -826,6 +980,48 @@
       },
       "status": "active",
       "notes": "Turkish-language global football news source."
+    },
+    {
+      "source_id": "refikanin_mutfagi",
+      "domain": "refikaninmutfagi.com",
+      "name": "Refika'nın Mutfağı",
+      "supported_topics": [
+        "Dünya mutfağı"
+      ],
+      "supported_information_needs": [
+        "popular international recipes",
+        "regional cuisines and signature dishes",
+        "ingredients and substitutions",
+        "cooking techniques"
+      ],
+      "language": "tr",
+      "authority_score": 0.74,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://www.refikaninmutfagi.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "dünya mutfağı tarif teknik site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "ingredients",
+          "measurements",
+          "preparation",
+          "substitution",
+          "technique"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Manual Turkish-language source for international recipes, substitutions, and cooking techniques."
     },
     {
       "source_id": "yemek_com_world",
@@ -1076,6 +1272,46 @@
       },
       "status": "active",
       "notes": "Official cultural source for museums, collections, and public history."
+    },
+    {
+      "source_id": "muze_gov_tr",
+      "domain": "muze.gov.tr",
+      "name": "Kültür ve Turizm Bakanlığı Müzeler",
+      "supported_topics": [
+        "Türk tarihi"
+      ],
+      "supported_information_needs": [
+        "institutions sources and museums"
+      ],
+      "language": "tr",
+      "authority_score": 0.9,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "evergreen",
+        "recent",
+        "versioned"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://muze.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "müze koleksiyon tarih site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "museum",
+          "collection",
+          "location",
+          "visitor information",
+          "institution"
+        ],
+        "max_candidates": 20
+      },
+      "status": "active",
+      "notes": "Official museum source from the manual source list."
     },
     {
       "source_id": "dergipark_history",

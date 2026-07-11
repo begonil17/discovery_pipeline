@@ -108,6 +108,10 @@ def candidate_listing_node(state):
             "source_ids_by_information_need",
             {},
         ),
+        additional_source_ids_by_information_need=listing_config.get(
+            "additional_source_ids_by_information_need",
+            {},
+        ),
         manual_candidates=config.manual_candidates(),
     )
 

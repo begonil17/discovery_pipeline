@@ -60,6 +60,7 @@ class CandidateLister:
         max_results_per_source_need: int | None = None,
         max_sources_per_information_need: int | None = None,
         source_ids_by_information_need: dict | None = None,
+        additional_source_ids_by_information_need: dict | None = None,
         manual_candidates: list[dict] | None = None,
     ):
         self.tavily = tavily
@@ -69,6 +70,9 @@ class CandidateLister:
         )
         self.source_ids_by_information_need = (
             source_ids_by_information_need or {}
+        )
+        self.additional_source_ids_by_information_need = (
+            additional_source_ids_by_information_need or {}
         )
         self.manual_candidates = manual_candidates or []
 
@@ -198,14 +202,21 @@ class CandidateLister:
         self,
         topic: str,
         need_name: str,
+        source_ids_by_information_need: dict | None = None,
     ) -> list[str] | None:
 
-        topic_config = self.source_ids_by_information_need.get(
+        source_config = (
+            source_ids_by_information_need
+            if source_ids_by_information_need is not None
+            else self.source_ids_by_information_need
+        )
+
+        topic_config = source_config.get(
             topic,
         )
 
         if topic_config is None:
-            topic_config = self.source_ids_by_information_need.get(
+            topic_config = source_config.get(
                 "*",
             )
 
@@ -228,6 +239,20 @@ class CandidateLister:
 
         return None
 
+    def additional_source_ids_for_need(
+        self,
+        topic: str,
+        need_name: str,
+    ) -> list[str]:
+
+        source_ids = self.source_ids_for_need(
+            topic,
+            need_name,
+            self.additional_source_ids_by_information_need,
+        )
+
+        return source_ids or []
+
     def sources_for_need(
         self,
         topic: str,
@@ -240,37 +265,61 @@ class CandidateLister:
             need.name,
         )
 
-        if allowed_source_ids is not None:
-            source_by_id = {
-                source.source_id: source
-                for source in sources
-            }
+        source_by_id = {
+            source.source_id: source
+            for source in sources
+        }
 
-            return [
+        if allowed_source_ids is not None:
+            matching = [
                 source_by_id[source_id]
                 for source_id in allowed_source_ids
                 if source_id in source_by_id
             ]
-
-        matching = [
-            source
-            for source in sources
-            if source.supports_need(
-                topic,
-                need.name,
-            )
-        ]
-
-        matching = sorted(
-            matching,
-            key=lambda source: source.authority_score,
-            reverse=True,
-        )
-
-        if self.max_sources_per_information_need is not None:
-            matching = matching[
-                : self.max_sources_per_information_need
+        else:
+            matching = [
+                source
+                for source in sources
+                if source.supports_need(
+                    topic,
+                    need.name,
+                )
             ]
+
+            matching = sorted(
+                matching,
+                key=lambda source: source.authority_score,
+                reverse=True,
+            )
+
+            if self.max_sources_per_information_need is not None:
+                matching = matching[
+                    : self.max_sources_per_information_need
+                ]
+
+        seen_source_ids = {
+            source.source_id
+            for source in matching
+        }
+
+        for source_id in self.additional_source_ids_for_need(
+            topic,
+            need.name,
+        ):
+            if source_id in seen_source_ids:
+                continue
+
+            source = source_by_id.get(source_id)
+
+            if source is None:
+                print(
+                    "Skipping additional source with unknown "
+                    f"source_id {source_id}."
+                )
+                continue
+
+            matching.append(source)
+            seen_source_ids.add(source.source_id)
 
         return matching
 

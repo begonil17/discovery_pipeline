@@ -5,6 +5,144 @@
     "source_ids_by_information_need": {
       "*": {}
     },
+    "additional_source_ids_by_information_need": {
+      "Türk mutfağı": {
+        "popular recipes": [
+          "nefisyemektarifleri"
+        ],
+        "regional dishes": [
+          "kultur_portali"
+        ],
+        "seasonal recipes": [
+          "nefisyemektarifleri"
+        ],
+        "cooking techniques": [
+          "nefisyemektarifleri"
+        ],
+        "cultural food traditions": [
+          "kultur_portali"
+        ]
+      },
+      "Türk kültürü": {
+        "everyday traditions and customs": [
+          "kultur_portali_culture"
+        ],
+        "festivals and celebrations": [
+          "kultur_portali_culture"
+        ],
+        "folk arts crafts and music": [
+          "kultur_portali_culture"
+        ],
+        "language proverbs and oral culture": [
+          "tdk"
+        ],
+        "cultural heritage institutions and resources": [
+          "unesco_tr"
+        ]
+      },
+      "Türkiye'de futbol": {
+        "fixtures and standings": [
+          "tff"
+        ],
+        "transfer news": [
+          "ntvspor"
+        ],
+        "team news": [
+          "tff"
+        ],
+        "league structure and rules": [
+          "tff"
+        ],
+        "club histories and rivalries": [
+          "tff"
+        ]
+      },
+      "Türkiye'de eğitim": {
+        "school calendar and exams": [
+          "meb"
+        ],
+        "official regulations": [
+          "meb"
+        ],
+        "curriculum and school levels": [
+          "meb_mufredat"
+        ],
+        "higher education and universities": [
+          "yok_atlas"
+        ],
+        "scholarships and student support": [
+          "gsb_kyk"
+        ]
+      },
+      "Türkiye'de voleybol": {
+        "fixtures results and standings": [
+          "tvf"
+        ],
+        "national teams and tournaments": [
+          "tvf"
+        ],
+        "club news and transfers": [
+          "voleybolplus"
+        ],
+        "league structure and rules": [
+          "tvf"
+        ],
+        "player and club profiles": [
+          "tvf"
+        ]
+      },
+      "Dünyada futbol": {
+        "international fixtures and standings": [
+          "fifa"
+        ],
+        "major tournaments and qualifiers": [
+          "uefa"
+        ],
+        "transfer news": [
+          "the_athletic_fc"
+        ],
+        "player club and league profiles": [
+          "fifa"
+        ],
+        "rules rankings and governance": [
+          "fifa"
+        ]
+      },
+      "Dünya mutfağı": {
+        "popular international recipes": [
+          "refikanin_mutfagi"
+        ],
+        "regional cuisines and signature dishes": [
+          "refikanin_mutfagi"
+        ],
+        "ingredients and substitutions": [
+          "refikanin_mutfagi"
+        ],
+        "cooking techniques": [
+          "refikanin_mutfagi"
+        ],
+        "recent food trends": [
+          "yemek_com_world"
+        ]
+      },
+      "Türk tarihi": {
+        "historical periods and timeline": [
+          "islam_ansiklopedisi"
+        ],
+        "key events and turning points": [
+          "islam_ansiklopedisi"
+        ],
+        "historical figures": [
+          "islam_ansiklopedisi"
+        ],
+        "institutions sources and museums": [
+          "muze_gov_tr"
+        ],
+        "recent research and publications": [
+          "dergipark_history"
+        ]
+      }
+    },
     "exploration_budget_ratio": 0.1
   },
   "selection": {
