@@ -1,18 +1,16 @@
 import json
-import re
 from pathlib import Path
 from typing import Any
 
 from src.config.settings import DATA_DIR
+from src.fetcher.saver import sanitize_filename
 
 
 ARTIFACT_DIR = DATA_DIR / "source_first_runs"
 
 
 def safe_name(name: str) -> str:
-    name = re.sub(r'[<>:"/\\|?*]', "", name)
-    name = re.sub(r"\s+", "_", name.strip())
-    return name
+    return sanitize_filename(name)
 
 
 class ArtifactStore:

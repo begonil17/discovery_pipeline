@@ -1563,6 +1563,517 @@
       },
       "status": "active",
       "notes": "UNESCO Turkey source for cultural heritage and intangible heritage references."
+    },
+    {
+      "source_id": "onedio_pop_culture",
+      "domain": "onedio.com",
+      "name": "Onedio Popüler Kültür",
+      "supported_topics": [
+        "Türkiyede popüler kültür"
+      ],
+      "supported_information_needs": [
+        "celebrity and influencer news",
+        "internet trends and social media culture",
+        "events festivals and awards",
+        "evergreen popular culture context"
+      ],
+      "language": "tr",
+      "authority_score": 0.72,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://onedio.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "trend",
+          "person",
+          "platform",
+          "date",
+          "reason for popularity"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Turkish-language source for mainstream internet culture and popular culture topics."
+    },
+    {
+      "source_id": "ntv_kultur_sanat",
+      "domain": "ntv.com.tr",
+      "name": "NTV Kültür Sanat",
+      "supported_topics": [
+        "Türkiyede popüler kültür",
+        "Türkiyede sinema & televizyon",
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "music charts artists and releases",
+        "events festivals and awards",
+        "cinema releases and box office",
+        "streaming releases and platforms",
+        "reviews interviews and criticism",
+        "global releases and box office",
+        "streaming series and platform news",
+        "awards festivals and nominations",
+        "industry trends and production news"
+      ],
+      "language": "tr",
+      "authority_score": 0.78,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://ntv.com.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "title",
+          "date",
+          "person",
+          "event",
+          "source attribution"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Mainstream Turkish news source for culture, arts, cinema, television, and entertainment."
+    },
+    {
+      "source_id": "hurriyet_kelebek",
+      "domain": "hurriyet.com.tr",
+      "name": "Hürriyet Kelebek",
+      "supported_topics": [
+        "Türkiyede popüler kültür",
+        "Türkiyede sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "celebrity and influencer news",
+        "music charts artists and releases",
+        "internet trends and social media culture",
+        "events festivals and awards",
+        "television series schedules and ratings",
+        "streaming releases and platforms"
+      ],
+      "language": "tr",
+      "authority_score": 0.7,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://hurriyet.com.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "person",
+          "series",
+          "event",
+          "date",
+          "platform",
+          "rating"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Popular Turkish entertainment and television coverage."
+    },
+    {
+      "source_id": "beyazperde_tr",
+      "domain": "beyazperde.com",
+      "name": "Beyazperde Türkiye",
+      "supported_topics": [
+        "Türkiyede sinema & televizyon",
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "cinema releases and box office",
+        "television series schedules and ratings",
+        "streaming releases and platforms",
+        "reviews interviews and criticism",
+        "global releases and box office",
+        "streaming series and platform news",
+        "awards festivals and nominations",
+        "reviews and critical reception"
+      ],
+      "language": "tr",
+      "authority_score": 0.8,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://beyazperde.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "title",
+          "release date",
+          "cast",
+          "review",
+          "rating",
+          "platform"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Turkish-language film and television source with news, listings, and reviews."
+    },
+    {
+      "source_id": "boxoffice_turkiye",
+      "domain": "boxofficeturkiye.com",
+      "name": "Box Office Türkiye",
+      "supported_topics": [
+        "Türkiyede sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "cinema releases and box office"
+      ],
+      "language": "tr",
+      "authority_score": 0.85,
+      "update_frequency": "weekly",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://boxofficeturkiye.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "film",
+          "box office",
+          "audience",
+          "weekend",
+          "release date"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "Specialized Turkish box office and theatrical release source."
+    },
+    {
+      "source_id": "ranini_tv",
+      "domain": "ranini.tv",
+      "name": "Ranini TV",
+      "supported_topics": [
+        "Türkiyede sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "television series schedules and ratings",
+        "streaming releases and platforms",
+        "reviews interviews and criticism"
+      ],
+      "language": "tr",
+      "authority_score": 0.72,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://ranini.tv"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "series",
+          "episode",
+          "channel",
+          "cast",
+          "platform",
+          "date"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Turkish television and streaming series news and commentary source."
+    },
+    {
+      "source_id": "sinema_gm",
+      "domain": "sinema.ktb.gov.tr",
+      "name": "Sinema Genel Müdürlüğü",
+      "supported_topics": [
+        "Türkiyede sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "industry awards regulations and institutions"
+      ],
+      "language": "tr",
+      "authority_score": 0.95,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "versioned",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://sinema.ktb.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "institution",
+          "support program",
+          "festival",
+          "award",
+          "official announcement"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Official source for Turkish cinema institutions, support, and announcements."
+    },
+    {
+      "source_id": "rtuk",
+      "domain": "rtuk.gov.tr",
+      "name": "RTÜK",
+      "supported_topics": [
+        "Türkiyede sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "industry awards regulations and institutions"
+      ],
+      "language": "tr",
+      "authority_score": 0.92,
+      "update_frequency": "periodic",
+      "popularity_metric": null,
+      "suitable_for": [
+        "versioned",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://rtuk.gov.tr"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "rule",
+          "decision",
+          "broadcasting",
+          "date",
+          "official source"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "Official source for Turkish broadcasting regulation and decisions."
+    },
+    {
+      "source_id": "box_office_mojo",
+      "domain": "boxofficemojo.com",
+      "name": "Box Office Mojo",
+      "supported_topics": [
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "global releases and box office"
+      ],
+      "language": "en",
+      "authority_score": 0.86,
+      "update_frequency": "weekly",
+      "popularity_metric": null,
+      "suitable_for": [
+        "short_ttl",
+        "recent"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://boxofficemojo.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "film",
+          "box office",
+          "market",
+          "weekend",
+          "release date"
+        ],
+        "max_candidates": 10
+      },
+      "status": "active",
+      "notes": "Global box office reference source."
+    },
+    {
+      "source_id": "variety",
+      "domain": "variety.com",
+      "name": "Variety",
+      "supported_topics": [
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "streaming series and platform news",
+        "awards festivals and nominations",
+        "reviews and critical reception",
+        "industry trends and production news",
+        "global releases and box office"
+      ],
+      "language": "en",
+      "authority_score": 0.84,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://variety.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "title",
+          "studio",
+          "platform",
+          "award",
+          "review",
+          "date"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "International entertainment industry news, awards, reviews, and release coverage."
+    },
+    {
+      "source_id": "deadline",
+      "domain": "deadline.com",
+      "name": "Deadline",
+      "supported_topics": [
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "streaming series and platform news",
+        "awards festivals and nominations",
+        "industry trends and production news"
+      ],
+      "language": "en",
+      "authority_score": 0.82,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "short_ttl"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://deadline.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "title",
+          "studio",
+          "platform",
+          "production",
+          "date",
+          "people involved"
+        ],
+        "max_candidates": 12
+      },
+      "status": "active",
+      "notes": "International film and television industry news source."
+    },
+    {
+      "source_id": "rottentomatoes",
+      "domain": "rottentomatoes.com",
+      "name": "Rotten Tomatoes",
+      "supported_topics": [
+        "Dünyada sinema & televizyon"
+      ],
+      "supported_information_needs": [
+        "reviews and critical reception"
+      ],
+      "language": "en",
+      "authority_score": 0.78,
+      "update_frequency": "daily",
+      "popularity_metric": null,
+      "suitable_for": [
+        "recent",
+        "evergreen"
+      ],
+      "collection_strategy": {
+        "method": "tavily_search",
+        "entry_points": [
+          "https://rottentomatoes.com"
+        ],
+        "search_templates": [
+          "{query} site:{domain}",
+          "{topic} {information_need} site:{domain}"
+        ],
+        "fields_to_preserve": [
+          "title",
+          "rating",
+          "critic score",
+          "audience score",
+          "review summary"
+        ],
+        "max_candidates": 8
+      },
+      "status": "active",
+      "notes": "Review aggregation source for global films and series."
     }
   ]
 }

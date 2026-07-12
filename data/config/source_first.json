@@ -1180,6 +1180,396 @@
           ]
         }
       ]
+    },
+    {
+      "topic": "Türkiyede popüler kültür",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "celebrity and influencer news",
+          "description": "Recent Turkish celebrity, influencer, social media personality, and entertainment news with dates and source attribution.",
+          "candidate_queries": [
+            "Türkiye magazin haberleri",
+            "sosyal medya fenomenleri Türkiye",
+            "ünlüler gündem Türkiye"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 14,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh representative celebrity and influencer coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "person",
+            "event",
+            "date",
+            "platform",
+            "source attribution"
+          ]
+        },
+        {
+          "name": "music charts artists and releases",
+          "description": "Popular Turkish music, artists, songs, album or single releases, charts, concerts, and audience trends.",
+          "candidate_queries": [
+            "Türkiye müzik listeleri",
+            "Spotify Türkiye top 50",
+            "Türk pop müzik haberleri"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 30,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "current music popularity and release context",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "artist",
+            "song",
+            "album",
+            "chart",
+            "date",
+            "platform"
+          ]
+        },
+        {
+          "name": "internet trends and social media culture",
+          "description": "Trending Turkish internet culture, memes, viral topics, social platforms, and recurring online discourse.",
+          "candidate_queries": [
+            "Türkiye sosyal medya gündemi",
+            "TikTok Türkiye trendleri",
+            "viral gündem Türkiye"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 7,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh social media and internet trend coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "trend",
+            "platform",
+            "date",
+            "people involved",
+            "reason for popularity"
+          ]
+        },
+        {
+          "name": "events festivals and awards",
+          "description": "Popular culture events, concerts, festivals, award shows, entertainment ceremonies, dates, venues, and winners.",
+          "candidate_queries": [
+            "Türkiye konser festivalleri",
+            "Altın Kelebek ödülleri",
+            "popüler kültür etkinlikleri Türkiye"
+          ],
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "events and awards with practical dates and outcomes",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "event",
+            "date",
+            "venue",
+            "award",
+            "winner",
+            "participants"
+          ]
+        },
+        {
+          "name": "evergreen popular culture context",
+          "description": "Background on Turkish popular culture history, fandoms, youth culture, media habits, and recurring cultural references.",
+          "candidate_queries": [
+            "Türkiye popüler kültür tarihi",
+            "Türkiye gençlik kültürü",
+            "fan kültürü Türkiye"
+          ],
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "evergreen",
+            "ttl_days": null,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "foundational popular culture context",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "period",
+            "community",
+            "media form",
+            "cultural context",
+            "example"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Türkiyede sinema & televizyon",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "cinema releases and box office",
+          "description": "Current Turkish theatrical releases, local films, box office performance, release dates, distributors, and audience metrics.",
+          "candidate_queries": [
+            "Türkiye vizyondaki filmler",
+            "Box Office Türkiye haftalık",
+            "yerli filmler vizyon"
+          ],
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 7,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh release and box office coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "film",
+            "release date",
+            "box office",
+            "weekend",
+            "distributor",
+            "audience"
+          ]
+        },
+        {
+          "name": "television series schedules and ratings",
+          "description": "Current Turkish TV series schedules, ratings, season status, cast updates, channels, and episode timing.",
+          "candidate_queries": [
+            "dizi reyting sonuçları",
+            "Türkiye televizyon yayın akışı diziler",
+            "yeni sezon dizileri"
+          ],
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 7,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh schedules and ratings for Turkish TV",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "series",
+            "channel",
+            "episode",
+            "rating",
+            "date",
+            "cast"
+          ]
+        },
+        {
+          "name": "streaming releases and platforms",
+          "description": "Turkish streaming platform releases, original series, films, platform availability, release dates, and cast details.",
+          "candidate_queries": [
+            "Netflix Türkiye yeni diziler",
+            "BluTV yeni çıkanlar",
+            "Gain Exxen yeni içerikler"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 30,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "current Turkish streaming release coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "title",
+            "platform",
+            "release date",
+            "genre",
+            "cast",
+            "season"
+          ]
+        },
+        {
+          "name": "reviews interviews and criticism",
+          "description": "Turkish film and TV reviews, criticism, interviews, festival reactions, and professional commentary.",
+          "candidate_queries": [
+            "yerli film eleştirileri",
+            "dizi incelemeleri Türkiye",
+            "oyuncu yönetmen röportaj"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "critical and interview coverage for context",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "title",
+            "review",
+            "critic",
+            "interviewee",
+            "quote summary",
+            "date"
+          ]
+        },
+        {
+          "name": "industry awards regulations and institutions",
+          "description": "Turkish cinema and TV institutions, awards, funding, regulations, broadcast rules, festivals, and official announcements.",
+          "candidate_queries": [
+            "Sinema Genel Müdürlüğü destekleri",
+            "Altın Portakal ödülleri",
+            "RTÜK televizyon yayın ilkeleri"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "versioned",
+            "ttl_days": 365,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "authoritative industry and regulatory information",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "institution",
+            "rule",
+            "award",
+            "festival",
+            "date",
+            "official source"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Dünyada sinema & televizyon",
+      "language": "tr",
+      "information_needs": [
+        {
+          "name": "global releases and box office",
+          "description": "Worldwide film releases, box office performance, international release dates, studios, and audience metrics.",
+          "candidate_queries": [
+            "dünya vizyon filmleri",
+            "global box office",
+            "Hollywood yeni filmler"
+          ],
+          "importance": 5,
+          "freshness_policy": {
+            "freshness_type": "short_ttl",
+            "ttl_days": 7,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "fresh global release and box office coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "film",
+            "release date",
+            "country",
+            "box office",
+            "studio",
+            "audience"
+          ]
+        },
+        {
+          "name": "streaming series and platform news",
+          "description": "Global streaming series, films, platform releases, renewals, cancellations, cast announcements, and release calendars.",
+          "candidate_queries": [
+            "Netflix yeni diziler dünya",
+            "Disney Plus yeni filmler",
+            "HBO Max yeni diziler"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 30,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "current streaming and platform news",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "title",
+            "platform",
+            "release date",
+            "renewal status",
+            "cast",
+            "country"
+          ]
+        },
+        {
+          "name": "awards festivals and nominations",
+          "description": "Major international film and TV awards, festivals, nominations, winners, dates, juries, and ceremony context.",
+          "candidate_queries": [
+            "Oscar adayları",
+            "Cannes Film Festivali",
+            "Emmy ödülleri"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "major award and festival coverage",
+          "max_selected_items": 4,
+          "fields_to_preserve": [
+            "award",
+            "festival",
+            "nominee",
+            "winner",
+            "date",
+            "category"
+          ]
+        },
+        {
+          "name": "reviews and critical reception",
+          "description": "Critical reception for important global films and TV series, review summaries, ratings, and audience response.",
+          "candidate_queries": [
+            "film eleştirileri dünya sineması",
+            "yabancı dizi inceleme",
+            "Rotten Tomatoes film"
+          ],
+          "importance": 4,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 90,
+            "newer_supersedes_older": false
+          },
+          "desired_coverage": "balanced review and reception coverage",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "title",
+            "critic",
+            "rating",
+            "audience response",
+            "review summary",
+            "date"
+          ]
+        },
+        {
+          "name": "industry trends and production news",
+          "description": "Global cinema and TV industry news, production announcements, strikes, studio strategy, franchises, and market trends.",
+          "candidate_queries": [
+            "Hollywood haberleri",
+            "sinema sektörü trendleri",
+            "global televizyon sektörü"
+          ],
+          "importance": 3,
+          "freshness_policy": {
+            "freshness_type": "recent",
+            "ttl_days": 60,
+            "newer_supersedes_older": true
+          },
+          "desired_coverage": "current global industry context",
+          "max_selected_items": 3,
+          "fields_to_preserve": [
+            "studio",
+            "production",
+            "trend",
+            "market",
+            "date",
+            "people involved"
+          ]
+        }
+      ]
     }
   ]
 }

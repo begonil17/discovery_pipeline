@@ -1,18 +1,56 @@
 import json
 import hashlib
 import re
+import unicodedata
 from pathlib import Path
 from urllib.parse import urlparse
 
 OUTPUT_DIR = Path("data/raw_documents")
 
 
+TURKISH_TRANSLITERATION = str.maketrans(
+    {
+        "ç": "c",
+        "Ç": "C",
+        "ğ": "g",
+        "Ğ": "G",
+        "ı": "i",
+        "İ": "I",
+        "ö": "o",
+        "Ö": "O",
+        "ş": "s",
+        "Ş": "S",
+        "ü": "u",
+        "Ü": "U",
+        "'": "",
+        "’": "",
+        "`": "",
+    }
+)
+
+
 def sanitize_filename(name: str) -> str:
 
-    name = re.sub(r'[<>:"/\\|?*]', "", name)
-    name = name.strip()
+    name = str(name or "").strip()
+    name = name.translate(TURKISH_TRANSLITERATION)
+    name = unicodedata.normalize("NFKD", name)
+    name = name.encode(
+        "ascii",
+        "ignore",
+    ).decode("ascii")
+    name = re.sub(
+        r"[^0-9A-Za-z._-]+",
+        "_",
+        name,
+    )
+    name = re.sub(
+        r"_+",
+        "_",
+        name,
+    )
+    name = name.strip("._-")
 
-    return name
+    return name or "unnamed"
 
 
 def document_filename(document) -> str:
