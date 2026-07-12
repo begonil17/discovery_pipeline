@@ -9,6 +9,8 @@ seeds = [
     "Dünyada sinema & televizyon",
 ]
 
+MEDIA_SEEDS_MAX_DOCUMENTS = 200
+
 
 app = build_graph()
 config = SourceFirstConfig()
@@ -18,9 +20,12 @@ max_documents_per_run = fetching_config.get(
 )
 
 if isinstance(max_documents_per_run, int):
-    max_documents_per_run = max(1, max_documents_per_run)
+    max_documents_per_run = min(
+        max(1, max_documents_per_run),
+        MEDIA_SEEDS_MAX_DOCUMENTS,
+    )
 else:
-    max_documents_per_run = None
+    max_documents_per_run = MEDIA_SEEDS_MAX_DOCUMENTS
 
 seed_count = len(seeds)
 remaining_document_budget = max_documents_per_run
