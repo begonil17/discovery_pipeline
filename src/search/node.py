@@ -4,6 +4,10 @@ import os
 from src.config.settings import (
     SEARCH_MODEL,
 )
+from src.discovery.cache import (
+    load_entities_from_stage,
+    save_entities_to_stage,
+)
 
 from src.llm.client import LLMClient
 
@@ -18,10 +22,27 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 def search_node(state):
 
+    seed = state["seed"]
+
+    if not state.get("refresh_search", False):
+        cached_entities = load_entities_from_stage(
+            seed,
+            "searched",
+        )
+
+        if cached_entities is not None:
+            print(
+                "Loaded search plans from cache "
+                f"({len(cached_entities)} entities)."
+            )
+            return {
+                "discovered_entities": cached_entities
+            }
+
     client = LLMClient()
     
     tavily = TavilyClient(
-        api_key=os.getenv(TAVILY_API_KEY)
+        api_key=TAVILY_API_KEY
     )
 
     entities = state["discovered_entities"]
@@ -74,6 +95,17 @@ def search_node(state):
         entity.search_plan = plan
 
         planned.append(entity)
+
+    cache_path = save_entities_to_stage(
+        seed,
+        "searched",
+        planned,
+    )
+
+    print(
+        "Cached search plans to "
+        f"{cache_path}."
+    )
 
     return {
 

@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # -----------------------
@@ -6,11 +7,26 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-DATA_DIR = PROJECT_ROOT / "data"
+DATA_DIR = Path(
+    os.getenv(
+        "PIPELINE_DATA_DIR",
+        PROJECT_ROOT / "data",
+    )
+).expanduser()
 
 CACHE_DIR = DATA_DIR / "cache"
 
 DISCOVERED_DIR = DATA_DIR / "discovered"
+
+RAW_DOCUMENTS_DIR = DATA_DIR / "raw_documents"
+
+OUTPUT_DIR = DATA_DIR / "output"
+
+MANIFEST_DIR = DATA_DIR / "manifests"
+
+DISCOVERY_MANIFEST_PATH = MANIFEST_DIR / "discovery_manifest.json"
+
+NUGGET_MANIFEST_PATH = MANIFEST_DIR / "nugget_manifest.json"
 
 
 # -----------------------

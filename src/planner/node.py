@@ -4,6 +4,10 @@ from src.planner.prompt import build_prompt
 from src.planner.registry import Registry
 from src.planner.schemas import PlannerDecision
 from src.config.settings import PLANNER_MODEL
+from src.discovery.cache import (
+    load_entities_from_stage,
+    save_entities_to_stage,
+)
 from src.llm.client import LLMClient
 
 
@@ -18,6 +22,30 @@ def planner_node(state):
     client = LLMClient()
 
     seed = state["seed"]
+
+    if not state.get("refresh_planner", False):
+        cached_planned_entities = load_entities_from_stage(
+            seed,
+            "planned",
+        )
+
+        if cached_planned_entities is not None:
+            cached_rejected_entities = (
+                load_entities_from_stage(
+                    seed,
+                    "rejected",
+                )
+                or []
+            )
+            print(
+                "Loaded planner results from cache "
+                f"({len(cached_planned_entities)} included, "
+                f"{len(cached_rejected_entities)} rejected)."
+            )
+            return {
+                "discovered_entities": cached_planned_entities,
+                "rejected_entities": cached_rejected_entities,
+            }
 
     entities = state["discovered_entities"]
 
@@ -149,6 +177,22 @@ def planner_node(state):
         f"excluded {len(rejected_entities)}."
     )
     print("=" * 80)
+
+    planned_cache_path = save_entities_to_stage(
+        seed,
+        "planned",
+        planned_entities,
+    )
+    rejected_cache_path = save_entities_to_stage(
+        seed,
+        "rejected",
+        rejected_entities,
+    )
+
+    print(
+        "Cached planner results to "
+        f"{planned_cache_path} and {rejected_cache_path}."
+    )
 
     return {
         "discovered_entities": planned_entities,
