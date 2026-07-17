@@ -4,7 +4,7 @@ from src.schemas.seed import Seed
 from src.schemas.entity import Entity
 
 
-class DiscoveryState(TypedDict, total=False):
+class DiscoveryState(TypedDict):
 
     seed: Seed
 
@@ -15,13 +15,3 @@ class DiscoveryState(TypedDict, total=False):
     rejected_entities: list[Entity]
 
     errors: list[str]
-
-    refresh_discovery: bool
-
-    refresh_enrichment: bool
-
-    refresh_planner: bool
-
-    refresh_search: bool
-
-    refresh_fetch: bool

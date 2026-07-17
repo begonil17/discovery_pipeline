@@ -2,13 +2,13 @@ import json
 import os
 import re
 import time
+from pathlib import Path
 from typing import Type
 
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
 from src.config.settings import (
-    DATA_DIR,
     LLM_PROVIDER,
     REQUEST_TIMEOUT,
 )
@@ -16,7 +16,7 @@ from src.config.settings import (
 load_dotenv()
 
 
-BAD_OUTPUT_DIR = DATA_DIR / "debug" / "llm_bad_outputs"
+BAD_OUTPUT_DIR = Path("data/debug/llm_bad_outputs")
 BAD_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

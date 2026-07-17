@@ -27,4 +27,4 @@ class Entity(BaseModel):
 
     search_plan: SearchPlan | None = None
 
-    documents: list[Document] = Field(default_factory=list)
+    documents: list[Document] = []
